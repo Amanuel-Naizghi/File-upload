@@ -6,6 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    <p>Hello am inside!</p>
+    <div>
+        <h2>Create Account</h2>
+        <p>Already have an account? <a href="/login">Login</a></p>
+        <form action="/createAccount" method="post">
+            <label for="userName">User name</label>
+            <input type="text" placeholder="Aman dope">
+            <label for="password">Password</label>
+            <input name="password" type="password">
+            <label for="confirm">Confirm password</label>
+            <input name="confirm" type="password">
+        </form>
+    </div>
 </body>
 </html>
