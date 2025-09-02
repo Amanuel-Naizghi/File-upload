@@ -3,14 +3,14 @@ const {PrismaClient} = require('./generated/prisma');
 const prisma = new PrismaClient();
 
 async function main() {
-    const newUser = await prisma.users.create({
-        data: {
-            userName : 'Moss',
-            password: 'Moss123$',
-        },
-    });
+    // const newUser = await prisma.users.create({
+    //     data: {
+    //         userName : 'Moss',
+    //         password: 'Moss123$',
+    //     },
+    // });
 
-    console.log('Created user:',newUser);
+    // console.log('Created user:',newUser);
 
     const foundUser = await prisma.users.findMany({
         where: {userName:'Moss'},
@@ -22,3 +22,5 @@ async function main() {
 main()
     .catch((e) => console.error(e))
     .finally(() => prisma.$disconnect());
+
+module.exports = prisma;
