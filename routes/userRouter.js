@@ -20,9 +20,18 @@ router.post('/login',
                         failureFlash:"Wrong user name or password"
                     }),
                     (req,res) => {
-                        res.status(200).json({message: "Successful login!"})
+                        res.redirect(`/user/${req.user.id}`)
                     }                    
 );
+
+router.get('/user/:id', ensureAuthenticated, async(req,res) => {
+    //Is used when user try to by pass the authentication part by typing the url like user/1
+    if(req.params.id != req.user.id){
+        return res.status(403).send("You cannot view another user's page.");
+    }
+
+    res.render('user');
+})
 
 
 module.exports = router;
