@@ -3,7 +3,7 @@ const {PrismaClient} = require('./generated/prisma');
 const prisma = new PrismaClient();
 
 async function main() {
-    // const newUser = await prisma.users.create({
+    // const newUser = await prisma.user.create({
     //     data: {
     //         userName : 'Moss',
     //         password: 'Moss123$',
@@ -12,7 +12,7 @@ async function main() {
 
     // console.log('Created user:',newUser);
 
-    const foundUser = await prisma.users.findMany({
+    const foundUser = await prisma.user.findMany({
         where: {userName:'Moss'},
     });
 

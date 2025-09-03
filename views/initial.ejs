@@ -9,13 +9,20 @@
     <div>
         <h2>Create Account</h2>
         <p>Already have an account? <a href="/login">Login</a></p>
+        <ul class="error-container">
+            <% if (locals.errors) {%>
+                <% errors.forEach((error) => { %>
+                  <li class="error-item"><%= error.msg %></li>
+                <% }); %>
+            <% } %>
+        </ul>
         <form action="/createAccount" method="post">
             <label for="userName">User name</label>
-            <input name="userName" type="text" placeholder="Aman dope">
+            <input name="userName" type="text" placeholder="Aman dope" value="<%= locals.old?.userName || '' %>" required>
             <label for="password">Password</label>
-            <input name="password" type="password">
-            <label for="confirm">Confirm password</label>
-            <input name="confirm" type="password">
+            <input name="password" type="password" required>
+            <label for="confirmPassword">Confirm password</label>
+            <input name="confirmPassword" type="password" required>
             <button type="submit">Sign up</button>
         </form>
     </div>
