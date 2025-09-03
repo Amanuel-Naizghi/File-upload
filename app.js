@@ -3,7 +3,7 @@ const path = require("node:path");
 const session = require("express-session");
 const passport = require("passport");
 require("./config/passport")(passport);
-
+const flash = require("connect-flash");
 
 const app = express();
 app.set("views", path.join(__dirname, "views"));
@@ -26,6 +26,11 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.error = req.flash("error");
+    next();
+})
 
 
 const router = require('./routes/userRouter');

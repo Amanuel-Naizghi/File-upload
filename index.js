@@ -12,9 +12,7 @@ async function main() {
 
     // console.log('Created user:',newUser);
 
-    const foundUser = await prisma.user.findMany({
-        where: {userName:'Moss'},
-    });
+    const foundUser = await prisma.user.findMany();
 
     console.log('Found user:', foundUser);
 }
