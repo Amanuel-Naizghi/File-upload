@@ -126,6 +126,24 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password'
 };
 
+exports.Prisma.FolderScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  userId: 'userId',
+  parentId: 'parentId'
+};
+
+exports.Prisma.FileScalarFieldEnum = {
+  id: 'id',
+  filename: 'filename',
+  createdAt: 'createdAt',
+  mimetype: 'mimetype',
+  path: 'path',
+  userId: 'userId',
+  folderId: 'folderId'
+};
+
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
   sid: 'sid',
@@ -146,6 +164,8 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Folder: 'Folder',
+  File: 'File',
   Session: 'Session'
 };
 

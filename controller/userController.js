@@ -47,8 +47,19 @@ exports.postAddUser = [
         try{
             const user = await prisma.user.create({
                 data:{userName: userName.toLowerCase(),
-                      password: hashedPassword}
+                      password: hashedPassword,
+                      folders: {
+                        create: [
+                            {name: "Documents"},
+                            {name: "Images"},
+                            {name: "Audios"},
+                            {name: "Videos"}
+                        ]
+                       }
+                    },
+                include: {folders:true}
             })
+            
             res.render('login');
         }catch (error) {
             res.status(500).json({error: error.message})

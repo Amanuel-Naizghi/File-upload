@@ -3,6 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 const userController = require('../controller/userController');
 const ensureAuthenticated = require('../middleware/ensureAuthenticated');
+const userControllerHelper = require('../controller/userControllerHelper');
 
 router.get('/',(req,res) => {
     res.render('initial');
@@ -29,8 +30,9 @@ router.get('/user/:id', ensureAuthenticated, async(req,res) => {
     if(req.params.id != req.user.id){
         return res.status(403).send("You cannot view another user's page.");
     }
-
-    res.render('user');
+    const userData = await userControllerHelper.getUserById(req.user.id);
+    console.log(userData);
+    res.render('user',{data:userData});
 })
 
 
