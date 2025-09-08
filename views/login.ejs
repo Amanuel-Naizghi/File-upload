@@ -6,12 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/login" method="post">
-        <label for="userName">User name</label>
-        <input name="userName" type="text" placeholder="Aman dope">
-        <label for="password">Password</label>
-        <input name="password" type="password">
-        <button type="submit">Login</button>
-    </form>
+    <div>
+        <% if(error && error.length > 0) { %>
+            <p><%= error[0] %> </p>
+        <%} %>
+        <form action="/login" method="post">
+            <label for="userName">User name</label>
+            <input name="userName" type="text" placeholder="Aman dope">
+            <label for="password">Password</label>
+            <input name="password" type="password">
+            <button type="submit">Login</button>
+        </form>
+    </div>
 </body>
 </html>
