@@ -10,9 +10,31 @@ const getUser = async (name) => {
 
 const getUserById = async (id) => {
     const user = await prisma.user.findUnique({
-        where: { id: id }
-    });
-    return user;
+        where: {id:id}
+    })
+
+    return user
 }
 
-module.exports = { getUser, getUserById };
+const getUserDataById = async (id) => {
+    const user = await prisma.user.findUnique({
+        where: { id: id },
+        include: {
+            files: true,
+            folders: {
+                include: {
+                    files: true,
+                    children:{
+                        include:{
+                            files:true
+                        }
+                    }
+                }
+            }
+        },
+    });
+
+    return user
+}
+
+module.exports = { getUser, getUserById, getUserDataById };

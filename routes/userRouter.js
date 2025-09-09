@@ -30,7 +30,7 @@ router.get('/user/:id', ensureAuthenticated, async(req,res) => {
     if(req.params.id != req.user.id){
         return res.status(403).send("You cannot view another user's page.");
     }
-    const userData = await userControllerHelper.getUserById(req.user.id);
+    const userData = await userControllerHelper.getUserDataById(req.user.id);
     console.log(userData);
     res.render('user',{data:userData});
 })

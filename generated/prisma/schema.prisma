@@ -28,7 +28,7 @@ model Folder {
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
-  parentId  Int
+  parentId  Int?
   parent    Folder?  @relation("SubFolders", fields: [parentId], references: [id])
   children  Folder[] @relation("SubFolders")
   files     File[]

@@ -2492,7 +2492,7 @@ export namespace Prisma {
     name: string
     createdAt: Date
     userId: number
-    parentId: number
+    parentId: number | null
     _count: FolderCountAggregateOutputType | null
     _avg: FolderAvgAggregateOutputType | null
     _sum: FolderSumAggregateOutputType | null
@@ -2585,7 +2585,7 @@ export namespace Prisma {
       name: string
       createdAt: Date
       userId: number
-      parentId: number
+      parentId: number | null
     }, ExtArgs["result"]["folder"]>
     composites: {}
   }
@@ -5688,6 +5688,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references
    */
@@ -5810,7 +5818,7 @@ export namespace Prisma {
     name?: StringFilter<"Folder"> | string
     createdAt?: DateTimeFilter<"Folder"> | Date | string
     userId?: IntFilter<"Folder"> | number
-    parentId?: IntFilter<"Folder"> | number
+    parentId?: IntNullableFilter<"Folder"> | number | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     parent?: XOR<FolderNullableScalarRelationFilter, FolderWhereInput> | null
     children?: FolderListRelationFilter
@@ -5822,7 +5830,7 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
-    parentId?: SortOrder
+    parentId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     parent?: FolderOrderByWithRelationInput
     children?: FolderOrderByRelationAggregateInput
@@ -5837,7 +5845,7 @@ export namespace Prisma {
     name?: StringFilter<"Folder"> | string
     createdAt?: DateTimeFilter<"Folder"> | Date | string
     userId?: IntFilter<"Folder"> | number
-    parentId?: IntFilter<"Folder"> | number
+    parentId?: IntNullableFilter<"Folder"> | number | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     parent?: XOR<FolderNullableScalarRelationFilter, FolderWhereInput> | null
     children?: FolderListRelationFilter
@@ -5849,7 +5857,7 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
-    parentId?: SortOrder
+    parentId?: SortOrderInput | SortOrder
     _count?: FolderCountOrderByAggregateInput
     _avg?: FolderAvgOrderByAggregateInput
     _max?: FolderMaxOrderByAggregateInput
@@ -5865,7 +5873,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Folder"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Folder"> | Date | string
     userId?: IntWithAggregatesFilter<"Folder"> | number
-    parentId?: IntWithAggregatesFilter<"Folder"> | number
+    parentId?: IntNullableWithAggregatesFilter<"Folder"> | number | null
   }
 
   export type FileWhereInput = {
@@ -6046,7 +6054,7 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     userId: number
-    parentId: number
+    parentId?: number | null
     children?: FolderUncheckedCreateNestedManyWithoutParentInput
     files?: FileUncheckedCreateNestedManyWithoutFolderInput
   }
@@ -6065,7 +6073,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
-    parentId?: IntFieldUpdateOperationsInput | number
+    parentId?: NullableIntFieldUpdateOperationsInput | number | null
     children?: FolderUncheckedUpdateManyWithoutParentNestedInput
     files?: FileUncheckedUpdateManyWithoutFolderNestedInput
   }
@@ -6075,7 +6083,7 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     userId: number
-    parentId: number
+    parentId?: number | null
   }
 
   export type FolderUpdateManyMutationInput = {
@@ -6088,7 +6096,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
-    parentId?: IntFieldUpdateOperationsInput | number
+    parentId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FileCreateInput = {
@@ -6322,6 +6330,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -6330,6 +6349,11 @@ export namespace Prisma {
   export type FolderNullableScalarRelationFilter = {
     is?: FolderWhereInput | null
     isNot?: FolderWhereInput | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type FolderCountOrderByAggregateInput = {
@@ -6380,6 +6404,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type FolderScalarRelationFilter = {
@@ -6636,6 +6676,14 @@ export namespace Prisma {
     deleteMany?: FileScalarWhereInput | FileScalarWhereInput[]
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type FolderUncheckedUpdateManyWithoutParentNestedInput = {
     create?: XOR<FolderCreateWithoutParentInput, FolderUncheckedCreateWithoutParentInput> | FolderCreateWithoutParentInput[] | FolderUncheckedCreateWithoutParentInput[]
     connectOrCreate?: FolderCreateOrConnectWithoutParentInput | FolderCreateOrConnectWithoutParentInput[]
@@ -6772,6 +6820,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -6786,6 +6845,33 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type FolderCreateWithoutUserInput = {
     name: string
     createdAt?: Date | string
@@ -6798,7 +6884,7 @@ export namespace Prisma {
     id?: number
     name: string
     createdAt?: Date | string
-    parentId: number
+    parentId?: number | null
     children?: FolderUncheckedCreateNestedManyWithoutParentInput
     files?: FileUncheckedCreateNestedManyWithoutFolderInput
   }
@@ -6864,7 +6950,7 @@ export namespace Prisma {
     name?: StringFilter<"Folder"> | string
     createdAt?: DateTimeFilter<"Folder"> | Date | string
     userId?: IntFilter<"Folder"> | number
-    parentId?: IntFilter<"Folder"> | number
+    parentId?: IntNullableFilter<"Folder"> | number | null
   }
 
   export type FileUpsertWithWhereUniqueWithoutUserInput = {
@@ -6927,7 +7013,7 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     userId: number
-    parentId: number
+    parentId?: number | null
     files?: FileUncheckedCreateNestedManyWithoutFolderInput
   }
 
@@ -7038,7 +7124,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
-    parentId?: IntFieldUpdateOperationsInput | number
+    parentId?: NullableIntFieldUpdateOperationsInput | number | null
     files?: FileUncheckedUpdateManyWithoutFolderNestedInput
   }
 
@@ -7105,7 +7191,7 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     userId: number
-    parentId: number
+    parentId?: number | null
     children?: FolderUncheckedCreateNestedManyWithoutParentInput
   }
 
@@ -7162,7 +7248,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
-    parentId?: IntFieldUpdateOperationsInput | number
+    parentId?: NullableIntFieldUpdateOperationsInput | number | null
     children?: FolderUncheckedUpdateManyWithoutParentNestedInput
   }
 
@@ -7170,7 +7256,7 @@ export namespace Prisma {
     id?: number
     name: string
     createdAt?: Date | string
-    parentId: number
+    parentId?: number | null
   }
 
   export type FileCreateManyUserInput = {
@@ -7194,7 +7280,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentId?: IntFieldUpdateOperationsInput | number
+    parentId?: NullableIntFieldUpdateOperationsInput | number | null
     children?: FolderUncheckedUpdateManyWithoutParentNestedInput
     files?: FileUncheckedUpdateManyWithoutFolderNestedInput
   }
@@ -7203,7 +7289,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentId?: IntFieldUpdateOperationsInput | number
+    parentId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FileUpdateWithoutUserInput = {
