@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .modal{
+            display:none;
+        }
+    </style>
 </head>
 <body>
+    <a href="/login">Logout</a>
     <p>User page is here</p>
     <div>
         <% if (locals.data) {%>
@@ -17,5 +23,42 @@
             <%})%>
         <%}%>
     </div>
+    <button id="newFolder">New Folder</button>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span id="closeModalBtn" class="close">&times;</span>
+        <h2>Sign Up</h2>
+        <form action="/createFolder" method="post">
+          <label>Folder name</label><br>
+          <input type="text" name="folderName" required>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  
+    <script>
+      const modal = document.getElementById("myModal");
+      const newFolder = document.getElementById("newFolder");
+      const closeBtn = document.getElementById("closeModalBtn");
+  
+      // Open modal
+      newFolder.onclick = function() {
+        modal.style.display = "block";
+      }
+  
+      // Close modal
+      closeBtn.onclick = function() {
+        modal.style.display = "none";
+      }
+  
+      // Close modal if clicking outside of it
+      window.onclick = function(event) {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      }
+    </script>
 </body>
 </html>

@@ -35,5 +35,9 @@ router.get('/user/:id', ensureAuthenticated, async(req,res) => {
     res.render('user',{data:userData});
 })
 
+router.post('/createUser',(req,res) => {
+    
+})
+
 
 module.exports = router;
