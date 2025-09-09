@@ -8,7 +8,14 @@
 <body>
     <p>User page is here</p>
     <div>
-        
+        <% if (locals.data) {%>
+            <% data.folders.forEach((item) => { %>
+                <div><%= item.name %></div>
+            <%})%>
+            <% data.files.forEach((item) => { %>
+                <div><%= item.filename %></div>
+            <%})%>
+        <%}%>
     </div>
 </body>
 </html>

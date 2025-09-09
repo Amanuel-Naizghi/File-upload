@@ -13,7 +13,7 @@ const getUserById = async (id) => {
         where: {id:id}
     })
 
-    return user
+    return user;
 }
 
 const getUserDataById = async (id) => {
@@ -34,7 +34,7 @@ const getUserDataById = async (id) => {
         },
     });
 
-    return user
+    return user;
 }
 
 module.exports = { getUser, getUserById, getUserDataById };
