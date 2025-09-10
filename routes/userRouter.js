@@ -35,9 +35,7 @@ router.get('/user/:id', ensureAuthenticated, async(req,res) => {
     res.render('user',{data:userData});
 })
 
-router.post('/createUser',(req,res) => {
-    
-})
+router.post('/createFolder',ensureAuthenticated,userController.createFolder);
 
 
 module.exports = router;

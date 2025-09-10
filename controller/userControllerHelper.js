@@ -37,4 +37,5 @@ const getUserDataById = async (id) => {
     return user;
 }
 
+
 module.exports = { getUser, getUserById, getUserDataById };

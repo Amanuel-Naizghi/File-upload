@@ -70,3 +70,24 @@ exports.postAddUser = [
     }
 ]
 
+exports.createFolder = async (req,res) => {
+    const {folderName, parentId} = req.body;
+    console.log(`Folder name is `,folderName);
+    try{
+        const folder = await prisma.folder.create({
+            data:{
+                name:folderName,
+                userId: req.user.id,
+                parentId:parentId ? Number (parentId) : null
+            }
+        });
+        const folders = await prisma.folder.findMany();
+          
+        console.log(folders);
+        res.status(201).json({success:true, folder})
+    }catch (err) {
+        console.error(err);
+        res.status(500).json({success:false,error:err.message});
+    }
+}
+
