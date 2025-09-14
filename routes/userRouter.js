@@ -17,25 +17,14 @@ router.get('/login',(req,res) => {
 
 router.post('/login', 
                      passport.authenticate('local',{
+                        successRedirect:'/folders/root',
                         failureRedirect:'/login',
                         failureFlash:"Wrong user name or password"
-                    }),
-                    (req,res) => {
-                        res.redirect(`/user/${req.user.id}`)
-                    }                    
+                    }),                  
 );
 
-router.get('/user/:id', ensureAuthenticated, async(req,res) => {
-    //Is used when user try to by pass the authentication part by typing the url like user/1
-    if(req.params.id != req.user.id){
-        return res.status(403).send("You cannot view another user's page.");
-    }
-    const userData = await userControllerHelper.getUserDataById(req.user.id);
-    console.log(userData);
-    res.render('user',{data:userData});
-})
-
-router.post('/createFolder',ensureAuthenticated,userController.createFolder);
-
+router.post('/folders',ensureAuthenticated,userController.createFolder);
+router.get('/folders/root', ensureAuthenticated,userController.getFolderContent);
+router.get("/folders/:id", ensureAuthenticated, userController.getFolderContent);
 
 module.exports = router;

@@ -72,7 +72,7 @@ exports.postAddUser = [
 
 exports.createFolder = async (req,res) => {
     const {folderName, parentId} = req.body;
-    console.log(`Folder name is `,folderName);
+
     try{
         const folder = await prisma.folder.create({
             data:{
@@ -81,13 +81,47 @@ exports.createFolder = async (req,res) => {
                 parentId:parentId ? Number (parentId) : null
             }
         });
-        const folders = await prisma.folder.findMany();
-          
-        console.log(folders);
-        res.status(201).json({success:true, folder})
+        res.redirect(`/user/${req.user.id}`);
     }catch (err) {
         console.error(err);
         res.status(500).json({success:false,error:err.message});
     }
 }
+
+exports.getFolderContent = async (req, res) => {
+    const folderId = req.params.id || 'root';
+    console.log(`your params is `,folderId);
+  
+    try {
+      if (folderId === 'root') {
+        console.log("Am inside your root!!")
+        const folders = await prisma.folder.findMany({
+          where: { userId: req.user.id, parentId: null },
+          include: { children: true, files: true }
+        });
+  
+        return res.render('folders', { folder: null, folders, files: [] });
+      }
+  
+      const folder = await prisma.folder.findUnique({
+        where: { folderId: Number(folderId) },
+        include: { children: true, files: true }
+      });
+  
+      if (!folder) {
+        return res.status(404).send("Folder not found");
+      }
+  
+      res.render('folders', {
+        folder,
+        folders: folder.children,
+        files: folder.files
+      });
+  
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error loading folder");
+    }
+};
+  
 
