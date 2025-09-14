@@ -81,7 +81,7 @@ exports.createFolder = async (req,res) => {
                 parentId:parentId ? Number (parentId) : null
             }
         });
-        res.redirect(`/user/${req.user.id}`);
+        res.redirect('/folders/root');
     }catch (err) {
         console.error(err);
         res.status(500).json({success:false,error:err.message});
@@ -90,11 +90,9 @@ exports.createFolder = async (req,res) => {
 
 exports.getFolderContent = async (req, res) => {
     const folderId = req.params.id || 'root';
-    console.log(`your params is `,folderId);
   
     try {
       if (folderId === 'root') {
-        console.log("Am inside your root!!")
         const folders = await prisma.folder.findMany({
           where: { userId: req.user.id, parentId: null },
           include: { children: true, files: true }
@@ -104,7 +102,7 @@ exports.getFolderContent = async (req, res) => {
       }
   
       const folder = await prisma.folder.findUnique({
-        where: { folderId: Number(folderId) },
+        where: { id: Number(folderId) },
         include: { children: true, files: true }
       });
   
