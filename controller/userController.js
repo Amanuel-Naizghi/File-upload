@@ -81,7 +81,7 @@ exports.createFolder = async (req,res) => {
                 parentId:parentId ? Number (parentId) : null
             }
         });
-        res.redirect('/folders/root');
+        res.redirect(`/folders/${parentId || 'root'}`);
     }catch (err) {
         console.error(err);
         res.status(500).json({success:false,error:err.message});
