@@ -31,7 +31,7 @@ module.exports = function(passport) {
     passport.deserializeUser(async (id, done) => {
         try {
             const rows = await userControllerHelper.getUserById(id);
-            console.log(`Rows :`, rows);
+            // console.log(`Rows :`, rows);
             done(null, rows);
         } catch (err) {
             done(err);

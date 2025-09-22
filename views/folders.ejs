@@ -9,14 +9,23 @@
   </style>
 </head>
 <body>
-
-  <ul>
-    <% folders.forEach(f => { %>
-      <li>
-        <a href="/folders/<%= f.id %>">📁 <%= f.name %></a>
-      </li>
-    <% }) %>
-  </ul>
+  <div class="directory-locator">
+    <% if(directoryArray.length > 0){ %>
+        <% directoryArray.forEach(item =>{%>
+            <a href=""><%= item %></a>
+        <%});%>
+    <%}%>
+    
+  </div>
+  <div class="folders-container">
+    <ul>
+        <% folders.forEach(f => { %>
+          <li>
+            <a href="/folders/<%= f.id %>">📁 <%= f.name %></a>
+          </li>
+        <% }) %>
+      </ul>
+  </div>
 
   <h2>Files:</h2>
   <ul>
@@ -39,6 +48,7 @@
   </div>
 
   <button id="newFolder">New Folder</button>
+  <a href="javascript:history.back()">Back to previous page</a>
 
   <script>
     const modal = document.getElementById("myModal");

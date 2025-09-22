@@ -66,7 +66,7 @@ exports.postAddUser = [
         }
     
         const findAllUsers = await prisma.user.findMany();
-        console.log(`All users are here men`, findAllUsers);
+        // console.log(`All users are here men`, findAllUsers);
     }
 ]
 
@@ -90,30 +90,30 @@ exports.createFolder = async (req,res) => {
 
 exports.getFolderContent = async (req, res) => {
     const folderId = req.params.id || 'root';
-  
+
     try {
       if (folderId === 'root') {
+        const directoryArray = ['root'];
         const folders = await prisma.folder.findMany({
           where: { userId: req.user.id, parentId: null },
           include: { children: true, files: true }
         });
-  
-        return res.render('folders', { folder: null, folders, files: [] });
+        return res.render('folders', { folder: null, folders, files: [],directoryArray });
       }
-  
       const folder = await prisma.folder.findUnique({
         where: { id: Number(folderId) },
         include: { children: true, files: true }
       });
+      const directoryArray = await userControllerHelper.getDirectory(folder);
   
       if (!folder) {
         return res.status(404).send("Folder not found");
       }
-  
       res.render('folders', {
         folder,
         folders: folder.children,
-        files: folder.files
+        files: folder.files,
+        directoryArray
       });
   
     } catch (err) {
@@ -121,5 +121,6 @@ exports.getFolderContent = async (req, res) => {
       res.status(500).send("Error loading folder");
     }
 };
+
   
 
