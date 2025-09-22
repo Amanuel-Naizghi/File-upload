@@ -12,7 +12,12 @@
   <div class="directory-locator">
     <% if(directoryArray.length > 0){ %>
         <% directoryArray.forEach(item =>{%>
-            <a href=""><%= item %></a>
+            <% if(item.name === 'root'){ %>
+                <a href="/folders/root"><%= item.name %></a>
+            <%}%>
+            <% if(item.name !== 'root') { %>
+                <a href="/folders/<%= item.id %>"><%= item.name %></a>
+            <%}%>
         <%});%>
     <%}%>
     

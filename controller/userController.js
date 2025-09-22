@@ -105,6 +105,8 @@ exports.getFolderContent = async (req, res) => {
         include: { children: true, files: true }
       });
       const directoryArray = await userControllerHelper.getDirectory(folder);
+
+      console.log(`directory Array`,directoryArray);
   
       if (!folder) {
         return res.status(404).send("Folder not found");
@@ -113,7 +115,7 @@ exports.getFolderContent = async (req, res) => {
         folder,
         folders: folder.children,
         files: folder.files,
-        directoryArray
+        directoryArray,
       });
   
     } catch (err) {
