@@ -6,6 +6,9 @@
     .modal{
         display:none;
     }
+    .edit-delete-container{
+        display:none;
+    }
   </style>
 </head>
 <body>
@@ -27,6 +30,15 @@
         <% folders.forEach(f => { %>
           <li>
             <a href="/folders/<%= f.id %>">📁 <%= f.name %></a>
+            <button id="edit-delete">☰</button>
+            <div class="edit-delete-container" id="edit-delete-container">
+                <form action="/delete/<%= f.id %>" method="post">
+                    <button id="delete" class="delete">Delete</button>
+                </form>
+                <form action="/edit/<%= f.id %>" method="post">
+                    <button id="edit" class="edit">Edit</button>
+                </form>
+            </div>
           </li>
         <% }) %>
       </ul>
@@ -59,6 +71,8 @@
     const modal = document.getElementById("myModal");
     const newFolder = document.getElementById("newFolder");
     const closeBtn = document.getElementById("closeModalBtn");
+    const editDelete = document.getElementById("edit-delete");
+    const editDeleteContainer = document.getElementById("edit-delete-container");
 
     // Open modal
     newFolder.onclick = function() {
@@ -78,6 +92,15 @@
         modal.style.display = "none";
         newFolder.style.display = "block";
       }
+    }
+
+    //Open edit and delete options
+    editDelete.onclick = function() {
+        if(window.getComputedStyle(editDeleteContainer).display === "none"){
+            editDeleteContainer.style.display = "block";
+        }else{
+            editDeleteContainer.style.display = "none";
+        }
     }
   </script>
 </body>
