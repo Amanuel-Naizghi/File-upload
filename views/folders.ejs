@@ -30,8 +30,8 @@
         <% folders.forEach(f => { %>
           <li>
             <a href="/folders/<%= f.id %>">📁 <%= f.name %></a>
-            <button id="edit-delete">☰</button>
-            <div class="edit-delete-container" id="edit-delete-container">
+            <button class="edit-delete" data-id="<%= f.id %>">☰</button>
+            <div class="edit-delete-container" id="<%= f.id %>">
                 <form action="/delete/<%= f.id %>" method="post">
                     <button id="delete" class="delete">Delete</button>
                 </form>
@@ -71,8 +71,8 @@
     const modal = document.getElementById("myModal");
     const newFolder = document.getElementById("newFolder");
     const closeBtn = document.getElementById("closeModalBtn");
-    const editDelete = document.getElementById("edit-delete");
-    const editDeleteContainer = document.getElementById("edit-delete-container");
+    const editDelete = document.querySelectorAll(".edit-delete");
+    const editDeleteContainer = document.querySelectorAll(".edit-delete-container");
 
     // Open modal
     newFolder.onclick = function() {
@@ -95,13 +95,18 @@
     }
 
     //Open edit and delete options
-    editDelete.onclick = function() {
-        if(window.getComputedStyle(editDeleteContainer).display === "none"){
-            editDeleteContainer.style.display = "block";
-        }else{
-            editDeleteContainer.style.display = "none";
-        }
-    }
+    editDelete.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const id = e.target.dataset.id;
+            const editDeleteItemContainer = document.getElementById(`${id}`);
+            if(window.getComputedStyle(editDeleteItemContainer).display === "none"){
+                editDeleteItemContainer.style.display = "block";
+            }else{
+                editDeleteItemContainer.style.display = "none";
+            }
+        })
+    })
+       
   </script>
 </body>
 </html>
