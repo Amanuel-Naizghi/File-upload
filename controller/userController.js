@@ -126,7 +126,6 @@ exports.getFolderContent = async (req, res) => {
 
 exports.deleteItem = async(req,res) => {
     const itemId = req.params.id;
-    console.log(`am trying to delete this sh*t`,itemId);
     try {
         await prisma.folder.delete({
             where: {id:Number(itemId)}
@@ -134,6 +133,18 @@ exports.deleteItem = async(req,res) => {
     }catch (err) {
         console.error(err);
         res.status(500).send("Error loading folder");
+    }
+}
+
+exports.editFolderName = async(req,res) => {
+    const {id,name} = req.body;
+    try{
+        await prisma.folder.update({
+            where: {id:Number(id)},
+            data: {name}
+        })
+    }catch (err){
+
     }
 }
 

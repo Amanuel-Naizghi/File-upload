@@ -57,7 +57,7 @@ closeBtn2.onclick = function() {
     modal2.style.display = "none";
 }
 
-
+// Used for editing the name of the folder for passing the folder name into the input field of the modal for editing
 document.addEventListener("DOMContentLoaded", () => {
     const editButtons = document.querySelectorAll(".edit-btn");
     const folderIdInput = document.getElementById("editFolderId");

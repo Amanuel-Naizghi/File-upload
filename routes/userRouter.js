@@ -27,6 +27,7 @@ router.post('/delete/:id',ensureAuthenticated,userController.deleteItem);
 router.post('/folders',ensureAuthenticated,userController.createFolder);
 router.get('/folders/root', ensureAuthenticated,userController.getFolderContent);
 router.get('/folders/:id', ensureAuthenticated, userController.getFolderContent);
+router.post('/editFolder',ensureAuthenticated, userController.editFolderName);
 
 
 module.exports = router;
