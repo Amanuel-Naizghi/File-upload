@@ -1,0 +1,76 @@
+
+const modal = document.getElementById("myModal");
+const modal2 = document.getElementById("myModal2");
+const newFolder = document.getElementById("newFolder");
+const closeBtn = document.getElementById("closeModalBtn");
+const closeBtn2 = document.getElementById("closeModalBtn2");
+const editDelete = document.querySelectorAll(".edit-delete");
+const editDeleteContainer = document.querySelectorAll(".edit-delete-container");
+const editBtn = document.querySelectorAll("#edit");
+
+// Open modal
+newFolder.onclick = function() {
+    modal.style.display = "block";
+    newFolder.style.display = "none";
+}
+
+// Close modal for creating a folder
+closeBtn.onclick = function() {
+    modal.style.display = "none";
+    newFolder.style.display = "block";
+}
+
+// Close modal if clicking outside of it
+window.onclick = function(event) {
+    if (event.target === modal) {
+    modal.style.display = "none";
+    newFolder.style.display = "block";
+    }
+    if (event.target === modal2) {
+    modal2.style.display = "none";
+    }
+}
+
+//Open edit and delete options
+editDelete.forEach(item => {
+    item.addEventListener('click', (e) => {
+        const id = e.target.dataset.id;
+        const editDeleteItemContainer = document.getElementById(`${id}`);
+        if(window.getComputedStyle(editDeleteItemContainer).display === "none"){
+            editDeleteItemContainer.style.display = "block";
+        }else{
+            editDeleteItemContainer.style.display = "none";
+        }
+    })
+});
+
+//Adding action listener for the edit button
+
+editBtn.forEach((item) => {
+    item.addEventListener('click', async  (e) => {
+    modal2.style.display = "block";
+    })
+});
+
+// Close modal for editing a folder
+closeBtn2.onclick = function() {
+    modal2.style.display = "none";
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const editButtons = document.querySelectorAll(".edit-btn");
+    const folderIdInput = document.getElementById("editFolderId");
+    const folderNameInput = document.getElementById("editFolderName");
+
+    editButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const folderId = button.getAttribute("data-id");
+        const folderName = button.getAttribute("data-name");
+
+        // Pre-fill modal inputs
+        folderIdInput.value = folderId;
+        folderNameInput.value = folderName;
+      });
+    });
+  });
