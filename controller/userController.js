@@ -144,17 +144,18 @@ exports.deleteItem = async(req,res) => {
 
 exports.editFolderName = async(req,res) => {
     const {id,name,parentId} = req.body;
+    console.log(`The parent id is `,parentId);
     try{
         await prisma.folder.update({
             where: {id:Number(id)},
             data: {name}
         });
-
         if(parentId === 'root'){
             res.redirect("/folders/root");
         }else{
             res.redirect(`/folders/${parentId}`);
         }
+        
     }catch (err){
         res.status(500).send("Error updating folder");
     }

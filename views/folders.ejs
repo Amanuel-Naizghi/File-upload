@@ -40,7 +40,7 @@
                     <input type="hidden" name="parentId" value="<%= f.parentId ? f.parentId : 'root' %>">
                     <button id="delete" class="delete">Delete</button>
                 </form>
-                <button data-name="<%= f.name %>" data-id="<%= f.id %>" id="edit" class="edit-btn" >Edit</button>              
+                <button data-name="<%= f.name %>" data-id="<%= f.id %>" data-parent-id="<%= f.parentId ? f.parentId : 'root' %>" id="edit" class="edit-btn" >Edit</button>              
             </div>
           </li>
         <% }) %>
@@ -73,7 +73,8 @@
     <div class="modal-content2">
       <span id="closeModalBtn2" class="close2">&times;</span>
       <form action="/editFolder" method="post">
-        <input type="hidden" name="id" id="editFolderId" value="<%= folder ? folder.id : 'root' %>">
+        <input type="hidden" name="id" id="editFolderId" >
+        <input type="hidden" name="parentId" id="editFolderParentId" >
         <input type="text" name="name" id="editFolderName" class="form-control" required>
         <button type="submit">Submit</button>
       </form>

@@ -60,17 +60,20 @@ closeBtn2.onclick = function() {
 // Used for editing the name of the folder for passing the folder name into the input field of the modal for editing
 document.addEventListener("DOMContentLoaded", () => {
     const editButtons = document.querySelectorAll(".edit-btn");
-    const folderIdInput = document.getElementById("editFolderId");
+    const folderParentIdInput = document.getElementById("editFolderParentId");
     const folderNameInput = document.getElementById("editFolderName");
+    const folderIdInput = document.getElementById("editFolderId");
 
     editButtons.forEach(button => {
       button.addEventListener("click", () => {
         const folderId = button.getAttribute("data-id");
         const folderName = button.getAttribute("data-name");
+        const folderParentId = button.getAttribute("data-parent-id");
 
         // Pre-fill modal inputs
-        folderIdInput.value = folderId;
+        folderParentIdInput.value = folderParentId;
         folderNameInput.value = folderName;
+        folderIdInput.value = folderId;
       });
     });
   });
