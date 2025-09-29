@@ -125,11 +125,17 @@ exports.getFolderContent = async (req, res) => {
 };
 
 exports.deleteItem = async(req,res) => {
-    const itemId = req.params.id;
+    const {id,parentId} = req.body;
     try {
         await prisma.folder.delete({
-            where: {id:Number(itemId)}
-        })
+            where: {id:Number(id)}
+        });
+
+        if(parentId === 'root'){
+            res.redirect("/folders/root");
+        }else{
+            res.redirect(`/folders/${parentId}`);
+        }
     }catch (err) {
         console.error(err);
         res.status(500).send("Error loading folder");
@@ -137,14 +143,20 @@ exports.deleteItem = async(req,res) => {
 }
 
 exports.editFolderName = async(req,res) => {
-    const {id,name} = req.body;
+    const {id,name,parentId} = req.body;
     try{
         await prisma.folder.update({
             where: {id:Number(id)},
             data: {name}
-        })
-    }catch (err){
+        });
 
+        if(parentId === 'root'){
+            res.redirect("/folders/root");
+        }else{
+            res.redirect(`/folders/${parentId}`);
+        }
+    }catch (err){
+        res.status(500).send("Error updating folder");
     }
 }
 
