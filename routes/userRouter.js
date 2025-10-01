@@ -3,7 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 const userController = require('../controller/userController');
 const ensureAuthenticated = require('../middleware/ensureAuthenticated');
-const userControllerHelper = require('../controller/userControllerHelper');
+const upload =require('../config/multer');
 
 router.get('/',(req,res) => {
     res.render('initial');
@@ -23,11 +23,12 @@ router.post('/login',
                     }),                  
 );
 
-router.post('/delete/:id',ensureAuthenticated,userController.deleteItem);
-router.post('/folders',ensureAuthenticated,userController.createFolder);
-router.get('/folders/root', ensureAuthenticated,userController.getFolderContent);
+router.post('/delete/:id', ensureAuthenticated, userController.deleteItem);
+router.post('/folders', ensureAuthenticated, userController.createFolder);
+router.get('/folders/root', ensureAuthenticated, userController.getFolderContent);
 router.get('/folders/:id', ensureAuthenticated, userController.getFolderContent);
-router.post('/editFolder',ensureAuthenticated, userController.editFolderName);
+router.post('/editFolder', ensureAuthenticated, userController.editFolderName);
+router.post('/uploadFile', ensureAuthenticated, upload.single("file"), userController.uploadFile);
 
 
 module.exports = router;

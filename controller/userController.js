@@ -161,5 +161,28 @@ exports.editFolderName = async(req,res) => {
     }
 }
 
+exports.uploadFile = async (req,res) => {
+    const {folderId} = req.body;
+    try{
+        await prisma.file.create({
+            data:{
+                filename: req.file.originalname,
+                mimetype: req.file.mimetype,
+                path: req.file.path,
+                userId: req.user.id,
+                folderId: folderId ?Number(folderId) : null,
+            }
+        });
+
+        if(!folderId){
+            res.redirect("/folders/root");
+        }else{
+            res.redirect(`/folders/${folderId}`);
+        }
+    }catch (err) {
+        res.status(500).send("Error uploading file");
+    }
+}
+
   
 

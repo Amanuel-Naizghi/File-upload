@@ -68,6 +68,13 @@
     </div>
   </div>
 
+  <!-- For adding a file -->
+  <form action="/uploadFile" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="folderId" value="<%= folder ? folder.id: null %>">
+    <input type="file" name="file" required>
+    <button type="submit">Add File</button>
+  </form>
+
   <!-- The Modal for editing a folder -->
   <div id="myModal2" class="modal2">
     <div class="modal-content2">

@@ -3691,7 +3691,7 @@ export namespace Prisma {
     mimetype: string
     path: string
     userId: number
-    folderId: number
+    folderId: number | null
     _count: FileCountAggregateOutputType | null
     _avg: FileAvgAggregateOutputType | null
     _sum: FileSumAggregateOutputType | null
@@ -3722,7 +3722,7 @@ export namespace Prisma {
     userId?: boolean
     folderId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-    folder?: boolean | FolderDefaultArgs<ExtArgs>
+    folder?: boolean | File$folderArgs<ExtArgs>
   }, ExtArgs["result"]["file"]>
 
   export type FileSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3734,7 +3734,7 @@ export namespace Prisma {
     userId?: boolean
     folderId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-    folder?: boolean | FolderDefaultArgs<ExtArgs>
+    folder?: boolean | File$folderArgs<ExtArgs>
   }, ExtArgs["result"]["file"]>
 
   export type FileSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3746,7 +3746,7 @@ export namespace Prisma {
     userId?: boolean
     folderId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-    folder?: boolean | FolderDefaultArgs<ExtArgs>
+    folder?: boolean | File$folderArgs<ExtArgs>
   }, ExtArgs["result"]["file"]>
 
   export type FileSelectScalar = {
@@ -3762,22 +3762,22 @@ export namespace Prisma {
   export type FileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "filename" | "createdAt" | "mimetype" | "path" | "userId" | "folderId", ExtArgs["result"]["file"]>
   export type FileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
-    folder?: boolean | FolderDefaultArgs<ExtArgs>
+    folder?: boolean | File$folderArgs<ExtArgs>
   }
   export type FileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
-    folder?: boolean | FolderDefaultArgs<ExtArgs>
+    folder?: boolean | File$folderArgs<ExtArgs>
   }
   export type FileIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
-    folder?: boolean | FolderDefaultArgs<ExtArgs>
+    folder?: boolean | File$folderArgs<ExtArgs>
   }
 
   export type $FilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "File"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
-      folder: Prisma.$FolderPayload<ExtArgs>
+      folder: Prisma.$FolderPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3786,7 +3786,7 @@ export namespace Prisma {
       mimetype: string
       path: string
       userId: number
-      folderId: number
+      folderId: number | null
     }, ExtArgs["result"]["file"]>
     composites: {}
   }
@@ -4182,7 +4182,7 @@ export namespace Prisma {
   export interface Prisma__FileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    folder<T extends FolderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FolderDefaultArgs<ExtArgs>>): Prisma__FolderClient<$Result.GetResult<Prisma.$FolderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    folder<T extends File$folderArgs<ExtArgs> = {}>(args?: Subset<T, File$folderArgs<ExtArgs>>): Prisma__FolderClient<$Result.GetResult<Prisma.$FolderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4612,6 +4612,25 @@ export namespace Prisma {
      * Limit how many Files to delete.
      */
     limit?: number
+  }
+
+  /**
+   * File.folder
+   */
+  export type File$folderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Folder
+     */
+    select?: FolderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Folder
+     */
+    omit?: FolderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FolderInclude<ExtArgs> | null
+    where?: FolderWhereInput
   }
 
   /**
@@ -5886,9 +5905,9 @@ export namespace Prisma {
     mimetype?: StringFilter<"File"> | string
     path?: StringFilter<"File"> | string
     userId?: IntFilter<"File"> | number
-    folderId?: IntFilter<"File"> | number
+    folderId?: IntNullableFilter<"File"> | number | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    folder?: XOR<FolderScalarRelationFilter, FolderWhereInput>
+    folder?: XOR<FolderNullableScalarRelationFilter, FolderWhereInput> | null
   }
 
   export type FileOrderByWithRelationInput = {
@@ -5898,7 +5917,7 @@ export namespace Prisma {
     mimetype?: SortOrder
     path?: SortOrder
     userId?: SortOrder
-    folderId?: SortOrder
+    folderId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     folder?: FolderOrderByWithRelationInput
   }
@@ -5913,9 +5932,9 @@ export namespace Prisma {
     mimetype?: StringFilter<"File"> | string
     path?: StringFilter<"File"> | string
     userId?: IntFilter<"File"> | number
-    folderId?: IntFilter<"File"> | number
+    folderId?: IntNullableFilter<"File"> | number | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    folder?: XOR<FolderScalarRelationFilter, FolderWhereInput>
+    folder?: XOR<FolderNullableScalarRelationFilter, FolderWhereInput> | null
   }, "id">
 
   export type FileOrderByWithAggregationInput = {
@@ -5925,7 +5944,7 @@ export namespace Prisma {
     mimetype?: SortOrder
     path?: SortOrder
     userId?: SortOrder
-    folderId?: SortOrder
+    folderId?: SortOrderInput | SortOrder
     _count?: FileCountOrderByAggregateInput
     _avg?: FileAvgOrderByAggregateInput
     _max?: FileMaxOrderByAggregateInput
@@ -5943,7 +5962,7 @@ export namespace Prisma {
     mimetype?: StringWithAggregatesFilter<"File"> | string
     path?: StringWithAggregatesFilter<"File"> | string
     userId?: IntWithAggregatesFilter<"File"> | number
-    folderId?: IntWithAggregatesFilter<"File"> | number
+    folderId?: IntNullableWithAggregatesFilter<"File"> | number | null
   }
 
   export type SessionWhereInput = {
@@ -6105,7 +6124,7 @@ export namespace Prisma {
     mimetype: string
     path: string
     user: UserCreateNestedOneWithoutFilesInput
-    folder: FolderCreateNestedOneWithoutFilesInput
+    folder?: FolderCreateNestedOneWithoutFilesInput
   }
 
   export type FileUncheckedCreateInput = {
@@ -6115,7 +6134,7 @@ export namespace Prisma {
     mimetype: string
     path: string
     userId: number
-    folderId: number
+    folderId?: number | null
   }
 
   export type FileUpdateInput = {
@@ -6124,7 +6143,7 @@ export namespace Prisma {
     mimetype?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutFilesNestedInput
-    folder?: FolderUpdateOneRequiredWithoutFilesNestedInput
+    folder?: FolderUpdateOneWithoutFilesNestedInput
   }
 
   export type FileUncheckedUpdateInput = {
@@ -6134,7 +6153,7 @@ export namespace Prisma {
     mimetype?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
-    folderId?: IntFieldUpdateOperationsInput | number
+    folderId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FileCreateManyInput = {
@@ -6144,7 +6163,7 @@ export namespace Prisma {
     mimetype: string
     path: string
     userId: number
-    folderId: number
+    folderId?: number | null
   }
 
   export type FileUpdateManyMutationInput = {
@@ -6161,7 +6180,7 @@ export namespace Prisma {
     mimetype?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
-    folderId?: IntFieldUpdateOperationsInput | number
+    folderId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SessionCreateInput = {
@@ -6420,11 +6439,6 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type FolderScalarRelationFilter = {
-    is?: FolderWhereInput
-    isNot?: FolderWhereInput
   }
 
   export type FileCountOrderByAggregateInput = {
@@ -6732,10 +6746,12 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFilesInput, UserUpdateWithoutFilesInput>, UserUncheckedUpdateWithoutFilesInput>
   }
 
-  export type FolderUpdateOneRequiredWithoutFilesNestedInput = {
+  export type FolderUpdateOneWithoutFilesNestedInput = {
     create?: XOR<FolderCreateWithoutFilesInput, FolderUncheckedCreateWithoutFilesInput>
     connectOrCreate?: FolderCreateOrConnectWithoutFilesInput
     upsert?: FolderUpsertWithoutFilesInput
+    disconnect?: FolderWhereInput | boolean
+    delete?: FolderWhereInput | boolean
     connect?: FolderWhereUniqueInput
     update?: XOR<XOR<FolderUpdateToOneWithWhereWithoutFilesInput, FolderUpdateWithoutFilesInput>, FolderUncheckedUpdateWithoutFilesInput>
   }
@@ -6904,7 +6920,7 @@ export namespace Prisma {
     createdAt?: Date | string
     mimetype: string
     path: string
-    folder: FolderCreateNestedOneWithoutFilesInput
+    folder?: FolderCreateNestedOneWithoutFilesInput
   }
 
   export type FileUncheckedCreateWithoutUserInput = {
@@ -6913,7 +6929,7 @@ export namespace Prisma {
     createdAt?: Date | string
     mimetype: string
     path: string
-    folderId: number
+    folderId?: number | null
   }
 
   export type FileCreateOrConnectWithoutUserInput = {
@@ -6979,7 +6995,7 @@ export namespace Prisma {
     mimetype?: StringFilter<"File"> | string
     path?: StringFilter<"File"> | string
     userId?: IntFilter<"File"> | number
-    folderId?: IntFilter<"File"> | number
+    folderId?: IntNullableFilter<"File"> | number | null
   }
 
   export type UserCreateWithoutFoldersInput = {
@@ -7265,7 +7281,7 @@ export namespace Prisma {
     createdAt?: Date | string
     mimetype: string
     path: string
-    folderId: number
+    folderId?: number | null
   }
 
   export type FolderUpdateWithoutUserInput = {
@@ -7297,7 +7313,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     mimetype?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
-    folder?: FolderUpdateOneRequiredWithoutFilesNestedInput
+    folder?: FolderUpdateOneWithoutFilesNestedInput
   }
 
   export type FileUncheckedUpdateWithoutUserInput = {
@@ -7306,7 +7322,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     mimetype?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
-    folderId?: IntFieldUpdateOperationsInput | number
+    folderId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FileUncheckedUpdateManyWithoutUserInput = {
@@ -7315,7 +7331,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     mimetype?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
-    folderId?: IntFieldUpdateOperationsInput | number
+    folderId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FolderCreateManyParentInput = {
