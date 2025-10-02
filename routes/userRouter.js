@@ -24,6 +24,7 @@ router.post('/login',
 );
 
 router.post('/delete/:id', ensureAuthenticated, userController.deleteItem);
+router.post('/deleteFile/:id',ensureAuthenticated, userController.deleteFile);
 router.post('/folders', ensureAuthenticated, userController.createFolder);
 router.get('/folders/root', ensureAuthenticated, userController.getFolderContent);
 router.get('/folders/:id', ensureAuthenticated, userController.getFolderContent);

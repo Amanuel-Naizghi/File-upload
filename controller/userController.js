@@ -187,5 +187,23 @@ exports.uploadFile = async (req,res) => {
     }
 }
 
+exports.deleteFile = async(req,res) => {
+    const {id,parentId} = req.body;
+    try {
+        await prisma.file.delete({
+            where: {id:Number(id)}
+        });
+
+        if(parentId === 'root'){
+            res.redirect("/folders/root");
+        }else{
+            res.redirect(`/folders/${parentId}`);
+        }
+    }catch (err) {
+        console.error(err);
+        res.status(500).send("Error loading folder");
+    }
+}
+
   
 
