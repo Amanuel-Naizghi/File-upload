@@ -1,12 +1,14 @@
 
 const modal = document.getElementById("myModal");
 const modal2 = document.getElementById("myModal2");
+const modal3 = document.getElementById("myModal3");
 const newFolder = document.getElementById("newFolder");
 const closeBtn = document.getElementById("closeModalBtn");
 const closeBtn2 = document.getElementById("closeModalBtn2");
 const editDelete = document.querySelectorAll(".edit-delete");
 const editDeleteContainer = document.querySelectorAll(".edit-delete-container");
 const editBtn = document.querySelectorAll("#edit");
+const editBtn2 = document.querySelectorAll("#edit2");
 
 // Open modal
 newFolder.onclick = function() {
@@ -44,11 +46,17 @@ editDelete.forEach(item => {
     })
 });
 
-//Adding action listener for the edit button
+//Adding action listener for the edit button of a folder
 
 editBtn.forEach((item) => {
     item.addEventListener('click', async  (e) => {
     modal2.style.display = "block";
+    })
+});
+//Adding action listener for the edit button of a file
+editBtn2.forEach((item) => {
+    item.addEventListener('click', async  (e) => {
+    modal3.style.display = "block";
     })
 });
 
@@ -74,6 +82,26 @@ document.addEventListener("DOMContentLoaded", () => {
         folderParentIdInput.value = folderParentId;
         folderNameInput.value = folderName;
         folderIdInput.value = folderId;
+      });
+    });
+  });
+// Used for editing the name of the folder for passing the folder name into the input field of the modal for editing
+  document.addEventListener("DOMContentLoaded", () => {
+    const editButtons = document.querySelectorAll(".edit-file-btn");
+    const fileParentIdInput = document.getElementById("editFileParentId");
+    const fileNameInput = document.getElementById("editFileName");
+    const fileIdInput = document.getElementById("editFileId");
+
+    editButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const folderId = button.getAttribute("data-id");
+        const folderName = button.getAttribute("data-name");
+        const folderParentId = button.getAttribute("data-parent-id");
+
+        // Pre-fill modal inputs
+        fileParentIdInput.value = folderParentId;
+        fileNameInput.value = folderName;
+        fileIdInput.value = folderId;
       });
     });
   });

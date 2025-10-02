@@ -9,6 +9,9 @@
     .modal2{
         display:none;
     }
+    .modal3{
+        display:none;
+    }
     .edit-delete-container{
         display:none;
     }
@@ -56,6 +59,7 @@
         <input type="hidden" name="parentId" value="<%= file.folderId ? file.folderId : 'root' %>">
         <button type="submit" onclick="return confirm('Are you sure you want to delete it?');" > Delete </button>
       </form>
+      <button data-name="<%= file.filename %>" data-id="<%= file.id %>" data-parent-id="<%= file.folderId ? file.folderId : 'root' %>" id="edit2" class="edit-file-btn" >Edit</button>
     <% }) %>
   </ul>
 
@@ -92,6 +96,19 @@
       </form>
     </div>
   </div>
+
+  <!-- The Modal for editing a folder -->
+  <div id="myModal3" class="modal2">
+  <div class="modal-content2">
+    <span id="closeModalBtn2" class="close2">&times;</span>
+    <form action="/editFile" method="post">
+      <input type="hidden" name="id" id="editFileId" >
+      <input type="hidden" name="parentId" id="editFileParentId" >
+      <input type="text" name="name" id="editFileName" class="form-control" required>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
 
   <a href="javascript:history.back()">Back to previous page</a>
 

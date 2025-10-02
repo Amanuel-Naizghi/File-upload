@@ -147,7 +147,7 @@ exports.deleteItem = async(req,res) => {
 
 exports.editFolderName = async(req,res) => {
     const {id,name,parentId} = req.body;
-    console.log(`The parent id is `,parentId);
+    console.log(`The parent id is what `,parentId);
     try{
         await prisma.folder.update({
             where: {id:Number(id)},
@@ -202,6 +202,25 @@ exports.deleteFile = async(req,res) => {
     }catch (err) {
         console.error(err);
         res.status(500).send("Error loading folder");
+    }
+}
+
+exports.editFileName = async(req,res) => {
+    const {id,name,parentId} = req.body;
+    console.log(`File name is `,name);
+    try{
+        await prisma.file.update({
+            where: {id:Number(id)},
+            data: {filename:name}
+        });
+        if(parentId === 'root'){
+            res.redirect("/folders/root");
+        }else{
+            res.redirect(`/folders/${parentId}`);
+        }
+        
+    }catch (err){
+        res.status(500).send("Error updating folder");
     }
 }
 

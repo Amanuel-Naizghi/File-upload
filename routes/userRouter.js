@@ -29,6 +29,7 @@ router.post('/folders', ensureAuthenticated, userController.createFolder);
 router.get('/folders/root', ensureAuthenticated, userController.getFolderContent);
 router.get('/folders/:id', ensureAuthenticated, userController.getFolderContent);
 router.post('/editFolder', ensureAuthenticated, userController.editFolderName);
+router.post('/editFile',ensureAuthenticated, userController.editFileName);
 router.post('/uploadFile', ensureAuthenticated, upload.single("file"), userController.uploadFile);
 
 
