@@ -98,15 +98,18 @@ exports.getFolderContent = async (req, res) => {
           where: { userId: req.user.id, parentId: null },
           include: { children: true, files: true }
         });
-        return res.render('folders', { folder: null, folders, files: [],directoryArray });
+        const files = await prisma.file.findMany({
+            where: { userId: req.user.id, folderId: null}
+        })
+        return res.render('folders', { folder: null, folders, files,directoryArray });
       }
       const folder = await prisma.folder.findUnique({
         where: { id: Number(folderId) },
         include: { children: true, files: true }
       });
       const directoryArray = await userControllerHelper.getDirectory(folder);
-
-      console.log(`directory Array`,directoryArray);
+    //   console.log(`The folders inside the file directory are `,folder);
+    //   console.log(`directory Array`,directoryArray);
   
       if (!folder) {
         return res.status(404).send("Folder not found");
