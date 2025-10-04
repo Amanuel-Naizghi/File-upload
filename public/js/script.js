@@ -65,6 +65,28 @@ closeBtn2.onclick = function() {
     modal2.style.display = "none";
 }
 
+// For viewing file details
+document.addEventListener("DOMContentLoaded", () => {
+    const fileContainer = document.querySelectorAll(".file-container");
+    const fileName = document.querySelector(".file-name");
+    const fileDate = document.querySelector(".file-date");
+    const fileType = document.querySelector(".file-type");
+    const fileInfo = document.querySelector(".file-info");
+
+    fileContainer.forEach((item) => {
+        item.addEventListener('click', async (e) => {
+            fileInfo.style.display = "block";
+            const name = item.getAttribute("data-name");
+            const date = item.getAttribute("data-date");
+            const type = item.getAttribute("data-type");
+
+            fileName.textContent = name;
+            fileDate.textContent = date.toString().replace(/ GMT.*/, '');
+            fileType.textContent = type;
+        })
+    })
+})
+
 // Used for editing the name of the folder for passing the folder name into the input field of the modal for editing
 document.addEventListener("DOMContentLoaded", () => {
     const editButtons = document.querySelectorAll(".edit-btn");
@@ -85,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
-// Used for editing the name of the folder for passing the folder name into the input field of the modal for editing
+// Used for editing the name of the file for passing the folder name into the input field of the modal for editing
   document.addEventListener("DOMContentLoaded", () => {
     const editButtons = document.querySelectorAll(".edit-file-btn");
     const fileParentIdInput = document.getElementById("editFileParentId");
