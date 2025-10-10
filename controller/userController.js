@@ -167,11 +167,16 @@ exports.editFolderName = async(req,res) => {
 exports.uploadFile = async (req,res) => {
     const {folderId} = req.body;
     try{
+        //Cloudinary file info 
+        const cloudinaryUrl = req.file.path; 
+        const mimeType = req.file.mimetype;
+        const originalName = req.file.originalname;
+
         await prisma.file.create({
             data:{
-                filename: req.file.originalname,
-                mimetype: req.file.mimetype,
-                path: req.file.path,
+                filename: originalName,
+                mimetype: mimeType,
+                path: cloudinaryUrl,
                 userId: req.user.id,
                 folderId: folderId ?Number(folderId) : null,
             }
@@ -221,6 +226,26 @@ exports.editFileName = async(req,res) => {
         
     }catch (err){
         res.status(500).send("Error updating folder");
+    }
+}
+
+exports.downloadFile = async (req,res) => {
+    const {id} = req.params;
+    try{
+        const file = await prisma.file.findUnique({
+            where: {id:Number(id)}
+        });
+        // console.log("I thing i got your file");
+        if (!file){
+            return res.status(404).send("File not found");
+        }
+        res.download(file.path, file.name, (err) => {
+            if (err) {
+                res.status(500).send("Error downloading file");
+            }
+        })
+    }catch (err){
+        res.status(500).send("Error downloading file");
     }
 }
 

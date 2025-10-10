@@ -31,6 +31,7 @@ router.get('/folders/:id', ensureAuthenticated, userController.getFolderContent)
 router.post('/editFolder', ensureAuthenticated, userController.editFolderName);
 router.post('/editFile',ensureAuthenticated, userController.editFileName);
 router.post('/uploadFile', ensureAuthenticated, upload.single("file"), userController.uploadFile);
+router.get('/download/:id', ensureAuthenticated,userController.downloadFile);
 
 
 module.exports = router;

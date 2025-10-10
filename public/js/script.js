@@ -72,6 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const fileDate = document.querySelector(".file-date");
     const fileType = document.querySelector(".file-type");
     const fileInfo = document.querySelector(".file-info");
+    const fileId = document.querySelector("#file-id-download");
+    const downloadForm = document.querySelector("#download-form");
 
     fileContainer.forEach((item) => {
         item.addEventListener('click', async (e) => {
@@ -79,10 +81,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const name = item.getAttribute("data-name");
             const date = item.getAttribute("data-date");
             const type = item.getAttribute("data-type");
+            const id = item.id;
 
             fileName.textContent = name;
             fileDate.textContent = date.toString().replace(/ GMT.*/, '');
             fileType.textContent = type;
+            fileId.id = id;
+            downloadForm.action = `/download/${id}`;//We are giving an action for the form based on the id of the item clicked
         })
     })
 })
