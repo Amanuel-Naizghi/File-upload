@@ -44,6 +44,7 @@ model File {
   userId    Int
   folderId  Int?
   folder    Folder?  @relation(fields: [folderId], references: [id])
+  publicId  String?
 }
 
 

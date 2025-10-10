@@ -2,6 +2,9 @@ const prisma = require('../index');
 const bcrypt = require("bcryptjs");
 const {body,validationResult} = require("express-validator");
 const userControllerHelper = require("./userControllerHelper");
+const axios = require("axios");
+const path = require("path");
+const cloudinary = require("../config/cloudinary");
 
 const lengthErr1 = "length must be more than 8 characters";
 const lengthErr2 = "length must be more than 4 characters and less than 10 characters";
@@ -126,7 +129,7 @@ exports.getFolderContent = async (req, res) => {
       res.status(500).send("Error loading folder");
     }
 };
-
+//Deleting folder
 exports.deleteItem = async(req,res) => {
     const {id,parentId} = req.body;
     try {
@@ -179,6 +182,7 @@ exports.uploadFile = async (req,res) => {
                 path: cloudinaryUrl,
                 userId: req.user.id,
                 folderId: folderId ?Number(folderId) : null,
+                publicId: req.file.filename,
             }
         });
 
@@ -195,6 +199,15 @@ exports.uploadFile = async (req,res) => {
 exports.deleteFile = async(req,res) => {
     const {id,parentId} = req.body;
     try {
+        const file = await prisma.file.findUnique({ where: { id: Number(id) } });
+
+        if (!file) return res.status(404).send('File not found');
+
+        if (file.publicId) {
+            // Delete from Cloudinary
+            await cloudinary.uploader.destroy(file.publicId);
+          }
+
         await prisma.file.delete({
             where: {id:Number(id)}
         });
@@ -212,7 +225,7 @@ exports.deleteFile = async(req,res) => {
 
 exports.editFileName = async(req,res) => {
     const {id,name,parentId} = req.body;
-    console.log(`File name is `,name);
+    //console.log(`File name is `,name);
     try{
         await prisma.file.update({
             where: {id:Number(id)},
@@ -239,11 +252,16 @@ exports.downloadFile = async (req,res) => {
         if (!file){
             return res.status(404).send("File not found");
         }
-        res.download(file.path, file.name, (err) => {
-            if (err) {
-                res.status(500).send("Error downloading file");
-            }
-        })
+
+        const response = await axios.get(file.path, { responseType: 'arraybuffer' });
+
+        res.setHeader('Content-Disposition', `attachment; filename="${file.filename}"`);
+        res.setHeader('Content-Type', file.mimetype);
+
+        // Send the file data
+        res.send(Buffer.from(response.data, 'binary'));
+
+        
     }catch (err){
         res.status(500).send("Error downloading file");
     }

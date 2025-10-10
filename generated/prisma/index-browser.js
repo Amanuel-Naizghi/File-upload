@@ -141,7 +141,8 @@ exports.Prisma.FileScalarFieldEnum = {
   mimetype: 'mimetype',
   path: 'path',
   userId: 'userId',
-  folderId: 'folderId'
+  folderId: 'folderId',
+  publicId: 'publicId'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {

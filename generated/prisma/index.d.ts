@@ -3531,6 +3531,7 @@ export namespace Prisma {
     path: string | null
     userId: number | null
     folderId: number | null
+    publicId: string | null
   }
 
   export type FileMaxAggregateOutputType = {
@@ -3541,6 +3542,7 @@ export namespace Prisma {
     path: string | null
     userId: number | null
     folderId: number | null
+    publicId: string | null
   }
 
   export type FileCountAggregateOutputType = {
@@ -3551,6 +3553,7 @@ export namespace Prisma {
     path: number
     userId: number
     folderId: number
+    publicId: number
     _all: number
   }
 
@@ -3575,6 +3578,7 @@ export namespace Prisma {
     path?: true
     userId?: true
     folderId?: true
+    publicId?: true
   }
 
   export type FileMaxAggregateInputType = {
@@ -3585,6 +3589,7 @@ export namespace Prisma {
     path?: true
     userId?: true
     folderId?: true
+    publicId?: true
   }
 
   export type FileCountAggregateInputType = {
@@ -3595,6 +3600,7 @@ export namespace Prisma {
     path?: true
     userId?: true
     folderId?: true
+    publicId?: true
     _all?: true
   }
 
@@ -3692,6 +3698,7 @@ export namespace Prisma {
     path: string
     userId: number
     folderId: number | null
+    publicId: string | null
     _count: FileCountAggregateOutputType | null
     _avg: FileAvgAggregateOutputType | null
     _sum: FileSumAggregateOutputType | null
@@ -3721,6 +3728,7 @@ export namespace Prisma {
     path?: boolean
     userId?: boolean
     folderId?: boolean
+    publicId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     folder?: boolean | File$folderArgs<ExtArgs>
   }, ExtArgs["result"]["file"]>
@@ -3733,6 +3741,7 @@ export namespace Prisma {
     path?: boolean
     userId?: boolean
     folderId?: boolean
+    publicId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     folder?: boolean | File$folderArgs<ExtArgs>
   }, ExtArgs["result"]["file"]>
@@ -3745,6 +3754,7 @@ export namespace Prisma {
     path?: boolean
     userId?: boolean
     folderId?: boolean
+    publicId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     folder?: boolean | File$folderArgs<ExtArgs>
   }, ExtArgs["result"]["file"]>
@@ -3757,9 +3767,10 @@ export namespace Prisma {
     path?: boolean
     userId?: boolean
     folderId?: boolean
+    publicId?: boolean
   }
 
-  export type FileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "filename" | "createdAt" | "mimetype" | "path" | "userId" | "folderId", ExtArgs["result"]["file"]>
+  export type FileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "filename" | "createdAt" | "mimetype" | "path" | "userId" | "folderId" | "publicId", ExtArgs["result"]["file"]>
   export type FileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     folder?: boolean | File$folderArgs<ExtArgs>
@@ -3787,6 +3798,7 @@ export namespace Prisma {
       path: string
       userId: number
       folderId: number | null
+      publicId: string | null
     }, ExtArgs["result"]["file"]>
     composites: {}
   }
@@ -4219,6 +4231,7 @@ export namespace Prisma {
     readonly path: FieldRef<"File", 'String'>
     readonly userId: FieldRef<"File", 'Int'>
     readonly folderId: FieldRef<"File", 'Int'>
+    readonly publicId: FieldRef<"File", 'String'>
   }
     
 
@@ -5675,7 +5688,8 @@ export namespace Prisma {
     mimetype: 'mimetype',
     path: 'path',
     userId: 'userId',
-    folderId: 'folderId'
+    folderId: 'folderId',
+    publicId: 'publicId'
   };
 
   export type FileScalarFieldEnum = (typeof FileScalarFieldEnum)[keyof typeof FileScalarFieldEnum]
@@ -5906,6 +5920,7 @@ export namespace Prisma {
     path?: StringFilter<"File"> | string
     userId?: IntFilter<"File"> | number
     folderId?: IntNullableFilter<"File"> | number | null
+    publicId?: StringNullableFilter<"File"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     folder?: XOR<FolderNullableScalarRelationFilter, FolderWhereInput> | null
   }
@@ -5918,6 +5933,7 @@ export namespace Prisma {
     path?: SortOrder
     userId?: SortOrder
     folderId?: SortOrderInput | SortOrder
+    publicId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     folder?: FolderOrderByWithRelationInput
   }
@@ -5933,6 +5949,7 @@ export namespace Prisma {
     path?: StringFilter<"File"> | string
     userId?: IntFilter<"File"> | number
     folderId?: IntNullableFilter<"File"> | number | null
+    publicId?: StringNullableFilter<"File"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     folder?: XOR<FolderNullableScalarRelationFilter, FolderWhereInput> | null
   }, "id">
@@ -5945,6 +5962,7 @@ export namespace Prisma {
     path?: SortOrder
     userId?: SortOrder
     folderId?: SortOrderInput | SortOrder
+    publicId?: SortOrderInput | SortOrder
     _count?: FileCountOrderByAggregateInput
     _avg?: FileAvgOrderByAggregateInput
     _max?: FileMaxOrderByAggregateInput
@@ -5963,6 +5981,7 @@ export namespace Prisma {
     path?: StringWithAggregatesFilter<"File"> | string
     userId?: IntWithAggregatesFilter<"File"> | number
     folderId?: IntNullableWithAggregatesFilter<"File"> | number | null
+    publicId?: StringNullableWithAggregatesFilter<"File"> | string | null
   }
 
   export type SessionWhereInput = {
@@ -6123,6 +6142,7 @@ export namespace Prisma {
     createdAt?: Date | string
     mimetype: string
     path: string
+    publicId?: string | null
     user: UserCreateNestedOneWithoutFilesInput
     folder?: FolderCreateNestedOneWithoutFilesInput
   }
@@ -6135,6 +6155,7 @@ export namespace Prisma {
     path: string
     userId: number
     folderId?: number | null
+    publicId?: string | null
   }
 
   export type FileUpdateInput = {
@@ -6142,6 +6163,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     mimetype?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutFilesNestedInput
     folder?: FolderUpdateOneWithoutFilesNestedInput
   }
@@ -6154,6 +6176,7 @@ export namespace Prisma {
     path?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
     folderId?: NullableIntFieldUpdateOperationsInput | number | null
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FileCreateManyInput = {
@@ -6164,6 +6187,7 @@ export namespace Prisma {
     path: string
     userId: number
     folderId?: number | null
+    publicId?: string | null
   }
 
   export type FileUpdateManyMutationInput = {
@@ -6171,6 +6195,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     mimetype?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FileUncheckedUpdateManyInput = {
@@ -6181,6 +6206,7 @@ export namespace Prisma {
     path?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
     folderId?: NullableIntFieldUpdateOperationsInput | number | null
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionCreateInput = {
@@ -6441,6 +6467,21 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type FileCountOrderByAggregateInput = {
     id?: SortOrder
     filename?: SortOrder
@@ -6449,6 +6490,7 @@ export namespace Prisma {
     path?: SortOrder
     userId?: SortOrder
     folderId?: SortOrder
+    publicId?: SortOrder
   }
 
   export type FileAvgOrderByAggregateInput = {
@@ -6465,6 +6507,7 @@ export namespace Prisma {
     path?: SortOrder
     userId?: SortOrder
     folderId?: SortOrder
+    publicId?: SortOrder
   }
 
   export type FileMinOrderByAggregateInput = {
@@ -6475,12 +6518,31 @@ export namespace Prisma {
     path?: SortOrder
     userId?: SortOrder
     folderId?: SortOrder
+    publicId?: SortOrder
   }
 
   export type FileSumOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     folderId?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type SessionCountOrderByAggregateInput = {
@@ -6738,6 +6800,10 @@ export namespace Prisma {
     connect?: FolderWhereUniqueInput
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type UserUpdateOneRequiredWithoutFilesNestedInput = {
     create?: XOR<UserCreateWithoutFilesInput, UserUncheckedCreateWithoutFilesInput>
     connectOrCreate?: UserCreateOrConnectWithoutFilesInput
@@ -6888,6 +6954,37 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type FolderCreateWithoutUserInput = {
     name: string
     createdAt?: Date | string
@@ -6920,6 +7017,7 @@ export namespace Prisma {
     createdAt?: Date | string
     mimetype: string
     path: string
+    publicId?: string | null
     folder?: FolderCreateNestedOneWithoutFilesInput
   }
 
@@ -6930,6 +7028,7 @@ export namespace Prisma {
     mimetype: string
     path: string
     folderId?: number | null
+    publicId?: string | null
   }
 
   export type FileCreateOrConnectWithoutUserInput = {
@@ -6996,6 +7095,7 @@ export namespace Prisma {
     path?: StringFilter<"File"> | string
     userId?: IntFilter<"File"> | number
     folderId?: IntNullableFilter<"File"> | number | null
+    publicId?: StringNullableFilter<"File"> | string | null
   }
 
   export type UserCreateWithoutFoldersInput = {
@@ -7070,6 +7170,7 @@ export namespace Prisma {
     createdAt?: Date | string
     mimetype: string
     path: string
+    publicId?: string | null
     user: UserCreateNestedOneWithoutFilesInput
   }
 
@@ -7080,6 +7181,7 @@ export namespace Prisma {
     mimetype: string
     path: string
     userId: number
+    publicId?: string | null
   }
 
   export type FileCreateOrConnectWithoutFolderInput = {
@@ -7282,6 +7384,7 @@ export namespace Prisma {
     mimetype: string
     path: string
     folderId?: number | null
+    publicId?: string | null
   }
 
   export type FolderUpdateWithoutUserInput = {
@@ -7313,6 +7416,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     mimetype?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     folder?: FolderUpdateOneWithoutFilesNestedInput
   }
 
@@ -7323,6 +7427,7 @@ export namespace Prisma {
     mimetype?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
     folderId?: NullableIntFieldUpdateOperationsInput | number | null
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FileUncheckedUpdateManyWithoutUserInput = {
@@ -7332,6 +7437,7 @@ export namespace Prisma {
     mimetype?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
     folderId?: NullableIntFieldUpdateOperationsInput | number | null
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FolderCreateManyParentInput = {
@@ -7348,6 +7454,7 @@ export namespace Prisma {
     mimetype: string
     path: string
     userId: number
+    publicId?: string | null
   }
 
   export type FolderUpdateWithoutParentInput = {
@@ -7379,6 +7486,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     mimetype?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutFilesNestedInput
   }
 
@@ -7389,6 +7497,7 @@ export namespace Prisma {
     mimetype?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FileUncheckedUpdateManyWithoutFolderInput = {
@@ -7398,6 +7507,7 @@ export namespace Prisma {
     mimetype?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
+    publicId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
