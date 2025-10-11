@@ -41,8 +41,8 @@ exports.postAddUser = [
         const errors = validationResult(req);
         if(!errors.isEmpty()){
             return res.render('initial',{
-                errors:errors.array(),
-                old:req.body
+                errors:errors.array(),//For showing the error input by the user
+                old:req.body// It puts the previous user inputs after the page get reloaded for better UX
             })
         }
         const {userName,password} = req.body;
@@ -248,7 +248,7 @@ exports.downloadFile = async (req,res) => {
         const file = await prisma.file.findUnique({
             where: {id:Number(id)}
         });
-        // console.log("I thing i got your file");
+
         if (!file){
             return res.status(404).send("File not found");
         }
