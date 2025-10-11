@@ -12,31 +12,34 @@
             <img src="/images/file-logo.png" alt="File" width="50px" height="50px">
             <p>File Saver</p>
         </div>
+        <div class="gap"></div>
         <div class="welcome">
             <h1>Welcome To File Saver Universe</h1>
             <p>Here we support you to save you files, and retrieve them any time on demand.</p>
         </div>
-        <div class="check-account">
-            <h2>Create Account</h2>
-            <p>Already have an account? <a href="/login">Login</a></p>
+        <div class="account-form">
+            <div class="check-account">
+                <h2>Create Account</h2>
+                <p>Already have an account? <a href="/login">Login</a></p>
+            </div>
+            
+            <ul class="error-container">
+                <% if (locals.errors) {%>
+                    <% errors.forEach((error) => { %>
+                      <li class="error-item"><%= error.msg %></li>
+                    <% }); %>
+                <% } %>
+            </ul>
+            <form action="/createAccount" method="post" class="create-account-form">
+                <label for="userName">User name</label>
+                <input name="userName" type="text" placeholder="Aman dope" value="<%= locals.old?.userName || '' %>" required>
+                <label for="password">Password</label>
+                <input name="password" type="password" required>
+                <label for="confirmPassword">Confirm password</label>
+                <input name="confirmPassword" type="password" required>
+                <button type="submit">Sign up</button>
+            </form>
         </div>
-        
-        <ul class="error-container">
-            <% if (locals.errors) {%>
-                <% errors.forEach((error) => { %>
-                  <li class="error-item"><%= error.msg %></li>
-                <% }); %>
-            <% } %>
-        </ul>
-        <form action="/createAccount" method="post" class="create-account-form">
-            <label for="userName">User name</label>
-            <input name="userName" type="text" placeholder="Aman dope" value="<%= locals.old?.userName || '' %>" required>
-            <label for="password">Password</label>
-            <input name="password" type="password" required>
-            <label for="confirmPassword">Confirm password</label>
-            <input name="confirmPassword" type="password" required>
-            <button type="submit">Sign up</button>
-        </form>
     </div>
 </body>
 </html>
