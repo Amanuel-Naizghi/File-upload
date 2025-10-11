@@ -40,7 +40,7 @@ const getUserDataById = async (id) => {
 const getDirectory = async (folder) => {
     let currentDirectory = folder;
     const directoryArray = [{name:'root',id:0}];
-    console.log(`Folder`, currentDirectory);
+    //console.log(`Folder`, currentDirectory);
     let id = currentDirectory.id;
     while(currentDirectory.parentId){
         const itemToAdd = {name:currentDirectory.name,id:currentDirectory.id}

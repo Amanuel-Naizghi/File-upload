@@ -1,0 +1,73 @@
+@font-face {
+    font-family: "myFont1";
+    src: url(../fonts/font1.ttf)format("truetype");
+}
+body{
+    background:#F5F5F0;
+    color:#3F2305;
+}
+.index-page-container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.index-page-container>.header{
+    display:flex;
+    align-self:flex-start;
+}
+.index-page-container>.header>img{
+    margin-top:0.5rem;
+}
+.index-page-container>.header>p{
+    font-family: "myFont1";
+    font-size:1.7rem;
+}
+.index-page-container>hr{
+   color: #4d3216;
+}
+.index-page-container>.welcome{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.index-page-container>.welcome>p{
+    font-size:1.2rem;
+}
+.index-page-container>.check-account{
+    margin-top:1.2rem;
+}
+.index-page-container>.create-account-form{
+    display: flex;
+    flex-direction: column;
+    padding:1.2rem 1rem;
+    font-size:1.2rem;
+    border-radius: 15px;
+    color:rgb(114, 114, 114);
+    border:1px solid #898989;
+    width:250px;
+}
+.index-page-container>.create-account-form>label{
+    margin-bottom: 0.2rem;
+    font-size:1rem;
+}
+.index-page-container>.create-account-form>input{
+    height:1.3rem;
+    margin-bottom: 0.8rem;
+    border:1px solid rgb(114, 114, 114);
+    border-radius: 10px;
+    padding:0.2rem;
+}
+.index-page-container>.create-account-form>button{
+    align-self:center;
+    width:100px;
+    height: 25px;
+    background-color: #4d3216;
+    color:white;
+    border:none;
+    border-radius:10px;
+    margin-top:1rem;
+}
+.index-page-container>.create-account-form>button:hover{
+    background-color: #563e25 ;
+}

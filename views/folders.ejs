@@ -28,6 +28,7 @@
                 <a href="/folders/root"><%= item.name %></a>
             <%}%>
             <% if(item.name !== 'root') { %>
+                <span>></span>
                 <a href="/folders/<%= item.id %>"><%= item.name %></a>
             <%}%>
         <%});%>
