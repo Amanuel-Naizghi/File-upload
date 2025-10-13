@@ -1,0 +1,85 @@
+@font-face {
+    font-family: "myFont1";
+    src: url(../fonts/font1.ttf)format("truetype");
+}
+@font-face {
+    font-family: "myFont2";
+    src: url(../fonts/font2.ttf)format("truetype");
+}
+body{
+    background:#F5F5F0;
+    color:#3F2305;
+    margin:0;
+    padding:0;
+}
+.folders-page-container{
+    display:flex;
+    flex-direction: column;
+}
+.folders-page-container>.header{
+    display:flex;
+    justify-content: space-between;
+}
+.folders-page-container>.header>.header-left{
+    display:flex;
+}
+.folders-page-container>.header>.header-left>img{
+    margin-top:0.5rem;
+}
+.folders-page-container>.header>.header-left>p{
+    font-family: "myFont1";
+    font-size:1.7rem;
+}
+.folders-page-container>.header>.header-right{
+    align-self:center;
+}
+.folders-page-container>.header>.header-right>a{
+    font-family:"myFont2";
+    margin-right:1rem;
+    text-decoration: none;
+    background: #4d3216;
+    color:white;
+    width:100px;
+    height:25px;
+    display:block;
+    border-radius:10px;
+    padding:0.3rem;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+.folders-page-container>.header>.header-right>a>img{
+   margin-right:0.5rem;
+}
+.folders-page-container>.header>.header-right>a:hover{
+    background-color: #563e25 ;
+}
+.folders-page-container>.gap{
+   background: #3F2305;
+   height:5px;
+   width:100%;
+   margin-bottom: 0.5rem;
+}
+.folders-page-container>.directory-locator{
+    padding:0.3rem;
+}
+.folders-page-container>.directory-locator>a{
+    text-decoration:none;
+    color:rgb(114, 114, 114);
+}
+.folders-page-container>.directory-locator>a:hover{
+    color:rgb(195, 195, 195);
+}
+.folders-page-container>.directory-locator>span{
+    color:white;
+    background:#4d3216;
+    border-radius:50%;
+    padding:0.1rem;
+    font-weight: bolder;
+    height:15px;
+    width:15px;
+    display:inline-block;
+    margin:0.2rem 0.1rem;
+    padding:0.1rem;
+    text-align: center;
+}

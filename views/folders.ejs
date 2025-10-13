@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Folders</title>
+  <link rel="stylesheet" href="/styles/folders.css">
   <style>
     .modal{
         display:none;
@@ -21,124 +22,137 @@
   </style>
 </head>
 <body>
-  <div class="directory-locator">
-    <% if(directoryArray.length > 0){ %>
-        <% directoryArray.forEach(item =>{%>
-            <% if(item.name === 'root'){ %>
-                <a href="/folders/root"><%= item.name %></a>
-            <%}%>
-            <% if(item.name !== 'root') { %>
-                <span>></span>
-                <a href="/folders/<%= item.id %>"><%= item.name %></a>
-            <%}%>
-        <%});%>
-    <%}%>
-    
-  </div>
-  <div class="folders-container">
-    <ul>
-        <% folders.forEach(f => { %>
-          <li>
-            <a href="/folders/<%= f.id %>">📁 <%= f.name %></a>
-            <button class="edit-delete" id="<%= f.name %>" data-id="<%= f.id %>">☰</button>
-            <div class="edit-delete-container" id="<%= f.id %>">
-                <form action="/delete/<%= f.id %>" method="post">
-                    <input type="hidden" name="id" value="<%= f.id %>">
-                    <input type="hidden" name="parentId" value="<%= f.parentId ? f.parentId : 'root' %>">
-                    <button id="delete" class="delete" onclick="return confirm('Are you sure you want to delete it?');" >Delete</button>
-                </form>
-                <button data-name="<%= f.name %>" data-id="<%= f.id %>" data-parent-id="<%= f.parentId ? f.parentId : 'root' %>" id="edit" class="edit-btn" >Edit</button>              
-            </div>
-          </li>
-        <% }) %>
-      </ul>
-  </div>
-
-  <h2>Files:</h2>
-  <ul>
-    <% files.forEach(file => { %>
-      <div class="file-container" id="<%= file.id %>" data-name="<%= file.filename %>" data-date="<%= file.createdAt %>" data-type="<%= file.mimetype %>">
-        <li>📄 <%= file.filename %></li>
-        <form action="/deleteFile/<%= file.id %>" method="post">
-          <input type="hidden" name="id" value="<%= file.id %>">
-          <input type="hidden" name="parentId" value="<%= file.folderId ? file.folderId : 'root' %>">
-          <button type="submit" onclick="return confirm('Are you sure you want to delete it?');" > Delete </button>
-        </form>
-        <button data-name="<%= file.filename %>" data-id="<%= file.id %>" data-parent-id="<%= file.folderId ? file.folderId : 'root' %>" id="edit2" class="edit-file-btn" >Edit</button>
+  <div class="folders-page-container">
+    <div class="header">
+      <div class="header-left">
+        <img src="/images/file-logo.png" alt="File" width="50px" height="50px">
+        <p>File Saver</p>
       </div>
-    <% }) %>
-  </ul>
-
-  <!-- The Modal for creating a folder -->
-  <button id="newFolder">New Folder</button>
-  <div id="myModal" class="modal">
-    <div class="modal-content">
-      <span id="closeModalBtn" class="close">&times;</span>
-      <form action="/folders" method="post">
-        <label>Folder name</label><br>
-        <input type="hidden" name="parentId" value="<%= folder ? folder.id : '' %>">
-        <input type="text" name="folderName" placeholder="New Folder Name" required>
-        <button type="submit">Submit</button>
-      </form>
+      <div class="header-right">
+        <a href="/login"><img src="/images/logout2.png" alt="Logout">Logout</a>
+      </div>
     </div>
-  </div>
-
-  <!-- For adding a file -->
-  <form action="/uploadFile" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="folderId" value="<%= folder ? folder.id: null %>">
-    <input type="file" name="file" required>
-    <button type="submit">Add File</button>
-  </form>
-
-  <!-- The Modal for editing a folder -->
-  <div id="myModal2" class="modal2">
-    <div class="modal-content2">
-      <span id="closeModalBtn2" class="close2">&times;</span>
-      <form action="/editFolder" method="post">
-        <input type="hidden" name="id" id="editFolderId" >
-        <input type="hidden" name="parentId" id="editFolderParentId" >
-        <input type="text" name="name" id="editFolderName" class="form-control" required>
-        <button type="submit">Submit</button>
-      </form>
+    <div class="gap"></div>
+    <div class="directory-locator">
+      <% if(directoryArray.length > 0){ %>
+          <% directoryArray.forEach(item =>{%>
+              <% if(item.name === 'root'){ %>
+                  <a href="/folders/root"><%= item.name %></a>
+              <%}%>
+              <% if(item.name !== 'root') { %>
+                  <span>></span>
+                  <a href="/folders/<%= item.id %>"><%= item.name %></a>
+              <%}%>
+          <%});%>
+      <%}%>
+      
     </div>
-  </div>
-
-  <!-- The Modal for editing a folder -->
-  <div id="myModal3" class="modal2">
-  <div class="modal-content2">
-    <span id="closeModalBtn2" class="close2">&times;</span>
-    <form action="/editFile" method="post">
-      <input type="hidden" name="id" id="editFileId" >
-      <input type="hidden" name="parentId" id="editFileParentId" >
-      <input type="text" name="name" id="editFileName" class="form-control" required>
-      <button type="submit">Submit</button>
+    <div class="folders-container">
+      <ul>
+          <% folders.forEach(f => { %>
+            <li>
+              <a href="/folders/<%= f.id %>">📁 <%= f.name %></a>
+              <button class="edit-delete" id="<%= f.name %>" data-id="<%= f.id %>">☰</button>
+              <div class="edit-delete-container" id="<%= f.id %>">
+                  <form action="/delete/<%= f.id %>" method="post">
+                      <input type="hidden" name="id" value="<%= f.id %>">
+                      <input type="hidden" name="parentId" value="<%= f.parentId ? f.parentId : 'root' %>">
+                      <button id="delete" class="delete" onclick="return confirm('Are you sure you want to delete it?');" >Delete</button>
+                  </form>
+                  <button data-name="<%= f.name %>" data-id="<%= f.id %>" data-parent-id="<%= f.parentId ? f.parentId : 'root' %>" id="edit" class="edit-btn" >Edit</button>              
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+    </div>
+  
+    <h2>Files:</h2>
+    <ul>
+      <% files.forEach(file => { %>
+        <div class="file-container" id="<%= file.id %>" data-name="<%= file.filename %>" data-date="<%= file.createdAt %>" data-type="<%= file.mimetype %>">
+          <li>📄 <%= file.filename %></li>
+          <form action="/deleteFile/<%= file.id %>" method="post">
+            <input type="hidden" name="id" value="<%= file.id %>">
+            <input type="hidden" name="parentId" value="<%= file.folderId ? file.folderId : 'root' %>">
+            <button type="submit" onclick="return confirm('Are you sure you want to delete it?');" > Delete </button>
+          </form>
+          <button data-name="<%= file.filename %>" data-id="<%= file.id %>" data-parent-id="<%= file.folderId ? file.folderId : 'root' %>" id="edit2" class="edit-file-btn" >Edit</button>
+        </div>
+      <% }) %>
+    </ul>
+  
+    <!-- The Modal for creating a folder -->
+    <button id="newFolder">New Folder</button>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span id="closeModalBtn" class="close">&times;</span>
+        <form action="/folders" method="post">
+          <label>Folder name</label><br>
+          <input type="hidden" name="parentId" value="<%= folder ? folder.id : '' %>">
+          <input type="text" name="folderName" placeholder="New Folder Name" required>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- For adding a file -->
+    <form action="/uploadFile" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="folderId" value="<%= folder ? folder.id: null %>">
+      <input type="file" name="file" required>
+      <button type="submit">Add File</button>
     </form>
-  </div>
-</div>
+  
+    <!-- The Modal for editing a folder -->
+    <div id="myModal2" class="modal2">
+      <div class="modal-content2">
+        <span id="closeModalBtn2" class="close2">&times;</span>
+        <form action="/editFolder" method="post">
+          <input type="hidden" name="id" id="editFolderId" >
+          <input type="hidden" name="parentId" id="editFolderParentId" >
+          <input type="text" name="name" id="editFolderName" class="form-control" required>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- The Modal for editing a folder -->
+    <div id="myModal3" class="modal2">
+      <div class="modal-content2">
+        <span id="closeModalBtn2" class="close2">&times;</span>
+        <form action="/editFile" method="post">
+          <input type="hidden" name="id" id="editFileId" >
+          <input type="hidden" name="parentId" id="editFileParentId" >
+          <input type="text" name="name" id="editFileName" class="form-control" required>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- File detail information -->
+    <div class="file-info">
+      <div class="file-image">
+        <img src="/images/file.png" alt="File">
+      </div>
+      <div class="file-name-container">
+        <span>File Name: </span>
+        <p class="file-name"> </p>
+      </div>
+      <div class="file-date-container">
+        <span>Created At: </span>
+        <p class="file-date"></p>
+      </div>
+      <div class="file-type-container">
+        <span>File type: </span>
+        <p class="file-type"></p>
+      </div>
+      <form action="/download" method="get" id="download-form">
+        <button type="submit" id="file-id-download">Download File</button>
+      </form>
+    </div>
+  
+    <a href="javascript:history.back()">Back to previous page</a>
 
-<!-- File detail information -->
-<div class="file-info">
-  <div class="file-image">
-    <img src="/images/file.png" alt="File">
   </div>
-  <div class="file-name-container">
-    <span>File Name: </span>
-    <p class="file-name"> </p>
-  </div>
-  <div class="file-date-container">
-    <span>Created At: </span>
-    <p class="file-date"></p>
-  </div>
-  <div class="file-type-container">
-    <span>File type: </span>
-    <p class="file-type"></p>
-  </div>
-  <form action="/download" method="get" id="download-form">
-    <button type="submit" id="file-id-download">Download File</button>
-  </form>
-</div>
-
-  <a href="javascript:history.back()">Back to previous page</a>
 
   <script src="/js/script.js"></script>
 
