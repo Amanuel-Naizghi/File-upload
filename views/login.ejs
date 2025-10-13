@@ -3,24 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/login.css">
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <h2>Welcome Back</h2>
-        <p>Don't have an account? <a href="/">Sign up</a></p>
-    </div>
-    <div>
-        <% if(error && error.length > 0) { %>
-            <p><%= error[0] %> </p>
-        <%} %>
-        <form action="/login" method="post">
-            <label for="userName">User name</label>
-            <input name="userName" type="text" placeholder="Aman dope">
-            <label for="password">Password</label>
-            <input name="password" type="password">
-            <button type="submit">Login</button>
-        </form>
+    <div class="login-page-container">
+        <div class="header">
+            <img src="/images/file-logo.png" alt="File" width="50px" height="50px">
+            <p>File Saver</p>
+        </div>
+        <div class="gap"></div>
+        <div class="welcome">
+            <h1>Welcome Back</h1>
+            <p>Don't have an account? <a href="/">Sign up</a></p>
+        </div>
+        <div class="login-content-container">
+            <% if(error && error.length > 0) { %>
+                <p><%= error[0] %> </p>
+            <%} %>
+            <h2>Login</h2>
+            <form action="/login" method="post" class="login-form">
+                <label for="userName">User name</label>
+                <input name="userName" type="text" placeholder="Aman dope">
+                <label for="password">Password</label>
+                <input name="password" type="password">
+                <button type="submit">Login</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
