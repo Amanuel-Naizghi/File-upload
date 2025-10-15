@@ -23,15 +23,27 @@ closeBtn.onclick = function() {
 }
 
 // Close modal if clicking outside of it
-window.onclick = function(event) {
-    if (event.target === modal) {
-    modal.style.display = "none";
-    newFolder.style.display = "block";
-    }
-    if (event.target === modal2) {
-    modal2.style.display = "none";
-    }
-}
+// window.onclick = function(event) {
+//     if (event.target === modal) {
+//     modal.style.display = "none";
+//     newFolder.style.display = "block";
+//     }
+//     if (event.target === modal2) {
+//     modal2.style.display = "none";
+//     }
+// }
+
+document.addEventListener("DOMContentLoaded", () => {
+    
+    document.addEventListener('click', (e) => {
+        const clickedInsideEditDelete = Array.from(editDelete).some( item => item.contains(e.target));
+        const clickedInsideEditDeleteContainer = Array.from(editDeleteContainer).some( item => item.contains(e.target));
+        if(!clickedInsideEditDelete && !clickedInsideEditDeleteContainer){
+            editDeleteContainer.forEach(item => item.style.display = "none");
+        }
+    })
+});
+
 
 //Open edit and delete options
 editDelete.forEach(item => {

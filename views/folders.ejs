@@ -19,6 +19,7 @@
     .file-info{
         display:none;
     }
+
   </style>
 </head>
 <body>
@@ -47,40 +48,43 @@
       <%}%>
       
     </div>
-    <div class="folders-container">
-      <ul>
-          <% folders.forEach(f => { %>
-            <li>
-              <a href="/folders/<%= f.id %>">📁 <%= f.name %></a>
-              <button class="edit-delete" id="<%= f.name %>" data-id="<%= f.id %>">☰</button>
-              <div class="edit-delete-container" id="<%= f.id %>">
-                  <form action="/delete/<%= f.id %>" method="post">
-                      <input type="hidden" name="id" value="<%= f.id %>">
-                      <input type="hidden" name="parentId" value="<%= f.parentId ? f.parentId : 'root' %>">
-                      <button id="delete" class="delete" onclick="return confirm('Are you sure you want to delete it?');" >Delete</button>
-                  </form>
-                  <button data-name="<%= f.name %>" data-id="<%= f.id %>" data-parent-id="<%= f.parentId ? f.parentId : 'root' %>" id="edit" class="edit-btn" >Edit</button>              
-              </div>
-            </li>
-          <% }) %>
-        </ul>
-    </div>
-  
-    <h2>Files:</h2>
-    <ul>
-      <% files.forEach(file => { %>
-        <div class="file-container" id="<%= file.id %>" data-name="<%= file.filename %>" data-date="<%= file.createdAt %>" data-type="<%= file.mimetype %>">
-          <li>📄 <%= file.filename %></li>
-          <form action="/deleteFile/<%= file.id %>" method="post">
-            <input type="hidden" name="id" value="<%= file.id %>">
-            <input type="hidden" name="parentId" value="<%= file.folderId ? file.folderId : 'root' %>">
-            <button type="submit" onclick="return confirm('Are you sure you want to delete it?');" > Delete </button>
-          </form>
-          <button data-name="<%= file.filename %>" data-id="<%= file.id %>" data-parent-id="<%= file.folderId ? file.folderId : 'root' %>" id="edit2" class="edit-file-btn" >Edit</button>
+    <div class="folders-files-container">
+      <% folders.forEach(f => { %>
+        <div class="folder">
+          <div class="folder-container">
+            <a href="/folders/<%= f.id %>">
+              <img src="/images/folder.png" alt="folder">
+            </a>
+            <div class="name-edit-delete">
+              <a href="/folders/<%= f.id %>" class="folder-name"><%= f.name %></a>
+              <button class="edit-delete" id="<%= f.name %>" data-id="<%= f.id %>">⋮</button>
+            </div>
+          </div>
+          
+          <div class="edit-delete-container" id="<%= f.id %>">
+              <form action="/delete/<%= f.id %>" method="post">
+                  <input type="hidden" name="id" value="<%= f.id %>">
+                  <input type="hidden" name="parentId" value="<%= f.parentId ? f.parentId : 'root' %>">
+                  <button id="delete" class="delete" onclick="return confirm('Are you sure you want to delete it?');" >Delete</button>
+              </form>
+              <button data-name="<%= f.name %>" data-id="<%= f.id %>" data-parent-id="<%= f.parentId ? f.parentId : 'root' %>" id="edit" class="edit-btn" >Edit</button>
+          </div>              
         </div>
       <% }) %>
-    </ul>
-  
+      <div class="files">
+        <% files.forEach(file => { %>
+          <div class="file-container" id="<%= file.id %>" data-name="<%= file.filename %>" data-date="<%= file.createdAt %>" data-type="<%= file.mimetype %>">
+            <p>📄 <%= file.filename %></p>
+            <form action="/deleteFile/<%= file.id %>" method="post">
+              <input type="hidden" name="id" value="<%= file.id %>">
+              <input type="hidden" name="parentId" value="<%= file.folderId ? file.folderId : 'root' %>">
+              <button type="submit" onclick="return confirm('Are you sure you want to delete it?');" > Delete </button>
+            </form>
+            <button data-name="<%= file.filename %>" data-id="<%= file.id %>" data-parent-id="<%= file.folderId ? file.folderId : 'root' %>" id="edit2" class="edit-file-btn" >Edit</button>
+          </div>
+        <% }) %>
+      </div>
+    </div>
     <!-- The Modal for creating a folder -->
     <button id="newFolder">New Folder</button>
     <div id="myModal" class="modal">

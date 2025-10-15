@@ -83,3 +83,78 @@ body{
     padding:0.1rem;
     text-align: center;
 }
+.folders-page-container>.folders-files-container{
+    display:flex;
+    padding:1rem;
+}
+.folders-page-container>.folders-files-container>.folder{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width:120px;
+    height:80px;
+    position:relative;
+}
+.folders-page-container>.folders-files-container>.folder>.folder-container{
+    display:flex;
+    flex-direction: column;
+    height:75px;
+    width:100px;
+}
+.folders-page-container>.folders-files-container>.folder>.folder-container:hover{
+    background-color: #d7d7d7;
+}
+.folders-page-container>.folders-files-container>.folder a{
+    text-decoration: none;
+    color:rgb(114, 114, 114);
+    height:50px;
+}
+.folders-page-container>.folders-files-container>.folder .name-edit-delete{
+    display:flex;
+}
+.folders-page-container>.folders-files-container>.folder .name-edit-delete>button{
+    width:20px;
+    height:20px;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    margin-left:0.3rem;
+    border:none;
+    background:none;
+}
+.folders-page-container>.folders-files-container>.folder .name-edit-delete>button:hover{
+    color:#898179;
+}
+.folders-page-container>.folders-files-container>.folder .name-edit-delete>a{
+    text-decoration: none;
+    color:rgb(114, 114, 114);
+    text-align: center;
+}
+.folders-page-container>.folders-files-container>.folder>.edit-delete-container{
+    position:absolute;
+    top:100%;
+}
+.folders-page-container>.folders-files-container>.folder>.edit-delete-container .delete{
+    width:3.2rem;
+    height:1.2rem;
+    color:white;
+    background-color: rgb(253, 34, 34);
+    border-radius: 10px;
+    margin-bottom: 0.2rem;
+    border:none;
+}
+.folders-page-container>.folders-files-container>.folder>.edit-delete-container .delete:hover{
+    background-color: rgb(250, 75, 75);
+}
+.folders-page-container>.folders-files-container>.folder>.edit-delete-container .edit-btn{
+    width:3.2rem;
+    height:1.2rem;
+    color:white;
+    background-color: rgb(36, 36, 255);
+    border-radius: 10px;
+    border:none;
+}
+.folders-page-container>.folders-files-container>.folder>.edit-delete-container .edit-btn:hover{
+    background-color: rgb(62, 62, 252);
+}
