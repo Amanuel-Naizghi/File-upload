@@ -17,6 +17,7 @@ body{
 .login-page-container>.header{
     display:flex;
     align-self:flex-start;
+    padding-left:0.3rem
 }
 .login-page-container>.header>img{
     margin-top:0.5rem;

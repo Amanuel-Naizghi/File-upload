@@ -24,6 +24,7 @@ body{
 .index-page-container>.header>p{
     font-family: "myFont1";
     font-size:1.7rem;
+    padding-left:0.3rem;
 }
 .index-page-container>.gap{
    background: #3F2305;

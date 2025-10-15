@@ -22,6 +22,7 @@ body{
 }
 .folders-page-container>.header>.header-left{
     display:flex;
+    padding-left:0.3rem;
 }
 .folders-page-container>.header>.header-left>img{
     margin-top:0.5rem;
