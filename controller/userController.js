@@ -5,6 +5,7 @@ const userControllerHelper = require("./userControllerHelper");
 const axios = require("axios");
 const path = require("path");
 const cloudinary = require("../config/cloudinary");
+const fs = require("fs");
 
 const lengthErr1 = "length must be more than 8 characters";
 const lengthErr2 = "length must be more than 4 characters and less than 10 characters";
@@ -169,31 +170,45 @@ exports.editFolderName = async(req,res) => {
 
 exports.uploadFile = async (req,res) => {
     const {folderId} = req.body;
-    try{
-        //Cloudinary file info 
-        const cloudinaryUrl = req.file.path; 
-        const mimeType = req.file.mimetype;
-        const originalName = req.file.originalname;
-
-        await prisma.file.create({
-            data:{
-                filename: originalName,
-                mimetype: mimeType,
-                path: cloudinaryUrl,
-                userId: req.user.id,
-                folderId: folderId ?Number(folderId) : null,
-                publicId: req.file.filename,
-            }
+    try {
+        if (!req.file) return res.status(400).send("No file uploaded.");
+    
+        const result = await cloudinary.uploader.upload(req.file.path, {
+          folder: "uploads",
+          resource_type: "auto",
         });
-
-        if(!folderId){
-            res.redirect("/folders/root");
-        }else{
-            res.redirect(`/folders/${folderId}`);
+    
+        await prisma.file.create({
+          data: {
+            filename: req.file.originalname,
+            mimetype: req.file.mimetype,
+            path: result.secure_url,
+            userId: req.user.id,
+            folderId: folderId ? Number(folderId) : null,
+            publicId: result.public_id,
+          },
+        });
+    
+        // Safely remove local file
+        try {
+          if (fs.existsSync(req.file.path)) {
+            fs.unlinkSync(req.file.path);
+          }
+        } catch (deleteErr) {
+          console.warn("⚠️ Failed to delete local file:", deleteErr.message);
         }
-    }catch (err) {
-        res.status(500).send("Error uploading file");
-    }
+    
+        // Redirect based on folder
+        if (!folderId) {
+          return res.redirect("/folders/root");
+        } else {
+          return res.redirect(`/folders/${folderId}`);
+        }
+    
+      } catch (err) {
+        console.error("❌ Error uploading file:", err);
+        return res.status(500).send("Error uploading file");
+      }
 }
 
 exports.deleteFile = async(req,res) => {
