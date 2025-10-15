@@ -101,6 +101,8 @@ body{
     flex-direction: column;
     height:75px;
     width:100px;
+    border-radius: 10px;
+    padding:0.4rem;
 }
 .folders-page-container>.folders-files-container>.folder>.folder-container:hover{
     background-color: #d7d7d7;
@@ -138,23 +140,23 @@ body{
 .folders-page-container>.folders-files-container>.folder>.edit-delete-container .delete{
     width:3.2rem;
     height:1.2rem;
-    color:white;
-    background-color: rgb(253, 34, 34);
-    border-radius: 10px;
-    margin-bottom: 0.2rem;
+    color:rgb(26, 26, 26);
+    background: #ddddd7;
     border:none;
+    text-align: start;
 }
 .folders-page-container>.folders-files-container>.folder>.edit-delete-container .delete:hover{
-    background-color: rgb(250, 75, 75);
+    background-color: #c7c7c7;
 }
 .folders-page-container>.folders-files-container>.folder>.edit-delete-container .edit-btn{
     width:3.2rem;
     height:1.2rem;
-    color:white;
-    background-color: rgb(36, 36, 255);
-    border-radius: 10px;
+    color:rgb(26, 26, 26);
+    background: #ddddd7;
     border:none;
+    border-top:1px solid rgb(149, 147, 147);
+    text-align: start;
 }
 .folders-page-container>.folders-files-container>.folder>.edit-delete-container .edit-btn:hover{
-    background-color: rgb(62, 62, 252);
+    background-color: #c7c7c7;
 }
