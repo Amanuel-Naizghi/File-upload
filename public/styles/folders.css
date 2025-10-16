@@ -97,15 +97,16 @@ body{
     height:80px;
     position:relative;
 }
-.folders-page-container>.folders-files-container>.folder>.folder-container{
+.folders-page-container>.folders-files-container>.folder>.folder-container,.files>.file-container{
     display:flex;
     flex-direction: column;
     height:75px;
     width:100px;
     border-radius: 10px;
     padding:0.4rem;
+    position:relative;
 }
-.folders-page-container>.folders-files-container>.folder>.folder-container:hover{
+.folders-page-container>.folders-files-container>.folder>.folder-container:hover, .files>.file-container:hover{
     background-color: #d7d7d7;
 }
 .folders-page-container>.folders-files-container>.folder a{
@@ -113,10 +114,11 @@ body{
     color:rgb(114, 114, 114);
     height:50px;
 }
-.folders-page-container>.folders-files-container>.folder .name-edit-delete{
+.folders-page-container>.folders-files-container>.folder .name-edit-delete, .files>.file-container>.name-edit-delete{
     display:flex;
+    width:100px;
 }
-.folders-page-container>.folders-files-container>.folder .name-edit-delete>button{
+.folders-page-container>.folders-files-container>.folder .name-edit-delete>button, .files>.file-container>.name-edit-delete>button{
     width:20px;
     height:20px;
     display:flex;
@@ -126,19 +128,22 @@ body{
     border:none;
     background:none;
 }
-.folders-page-container>.folders-files-container>.folder .name-edit-delete>button:hover{
+.folders-page-container>.folders-files-container>.folder .name-edit-delete>button:hover, .files>.file-container>.name-edit-delete>button:hover{
     color:#898179;
 }
-.folders-page-container>.folders-files-container>.folder .name-edit-delete>a{
+.folders-page-container>.folders-files-container>.folder .name-edit-delete>a, .files>.file-container>.name-edit-delete>.name{
     text-decoration: none;
     color:rgb(114, 114, 114);
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
 }
-.folders-page-container>.folders-files-container>.folder>.edit-delete-container{
+.folders-page-container>.folders-files-container>.folder>.edit-delete-container, .file-container>.edit-delete-container{
     position:absolute;
     top:100%;
 }
-.folders-page-container>.folders-files-container>.folder>.edit-delete-container .delete{
+.folders-page-container>.folders-files-container>.folder>.edit-delete-container .delete, .file-container .delete{
     width:3.2rem;
     height:1.2rem;
     color:rgb(26, 26, 26);
@@ -146,10 +151,10 @@ body{
     border:none;
     text-align: start;
 }
-.folders-page-container>.folders-files-container>.folder>.edit-delete-container .delete:hover{
+.folders-page-container>.folders-files-container>.folder>.edit-delete-container .delete:hover, .file-container .delete:hover{
     background-color: #c7c7c7;
 }
-.folders-page-container>.folders-files-container>.folder>.edit-delete-container .edit-btn{
+.folders-page-container>.folders-files-container>.folder>.edit-delete-container .edit-btn, .file-container .edit-btn{
     width:3.2rem;
     height:1.2rem;
     color:rgb(26, 26, 26);
@@ -158,6 +163,22 @@ body{
     border-top:1px solid rgb(149, 147, 147);
     text-align: start;
 }
-.folders-page-container>.folders-files-container>.folder>.edit-delete-container .edit-btn:hover{
+.folders-page-container>.folders-files-container>.folder>.edit-delete-container .edit-btn:hover, .file-container .edit-btn:hover{
     background-color: #c7c7c7;
+}
+.folders-page-container>.folders-files-container>.files{
+    display:flex;
+    height:80px;
+}
+.folders-page-container>.folders-files-container>.files>.file-container{
+    display:flex;
+    flex-direction:column;
+    padding-bottom: 0;
+}
+.folders-page-container>.folders-files-container>.files>.file-container>img{
+    width:40px;
+    height:40px;
+}
+.files>.file-container>.name-edit-delete>.name{
+    margin:0.4rem 0rem 0rem 0rem;
 }
