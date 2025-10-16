@@ -168,48 +168,48 @@ exports.editFolderName = async(req,res) => {
     }
 }
 
-exports.uploadFile = async (req,res) => {
-    const {folderId} = req.body;
+exports.uploadFile = async (req, res) => {
+    const { folderId } = req.body;
+  
     try {
-        if (!req.file) return res.status(400).send("No file uploaded.");
-    
-        const result = await cloudinary.uploader.upload(req.file.path, {
-          folder: "uploads",
-          resource_type: "auto",
-        });
-    
-        await prisma.file.create({
-          data: {
-            filename: req.file.originalname,
-            mimetype: req.file.mimetype,
-            path: result.secure_url,
-            userId: req.user.id,
-            folderId: folderId ? Number(folderId) : null,
-            publicId: result.public_id,
-          },
-        });
-    
-        // Safely remove local file
-        try {
-          if (fs.existsSync(req.file.path)) {
-            fs.unlinkSync(req.file.path);
-          }
-        } catch (deleteErr) {
-          console.warn("⚠️ Failed to delete local file:", deleteErr.message);
-        }
-    
-        // Redirect based on folder
-        if (!folderId) {
-          return res.redirect("/folders/root");
-        } else {
-          return res.redirect(`/folders/${folderId}`);
-        }
-    
-      } catch (err) {
-        console.error("❌ Error uploading file:", err);
-        return res.status(500).send("Error uploading file");
+      // Check if a file was actually uploaded
+      if (!req.file) {
+        console.error("⚠️ No file received from form");
+        return res.status(400).send("No file uploaded");
       }
-}
+  
+      // Cloudinary automatically uploads via multer-storage-cloudinary
+      // `req.file` already contains cloudinary info (no need to call cloudinary.uploader.upload again)
+      const { originalname, mimetype, path, filename } = req.file;
+  
+      console.log("📦 Uploaded file info:", req.file);
+  
+      // Save file record to DB
+      await prisma.file.create({
+        data: {
+          filename: originalname,
+          mimetype,
+          path,             // this is the Cloudinary URL
+          userId: req.user.id,
+          folderId: folderId ? Number(folderId) : null,
+          publicId: filename, // Cloudinary’s public_id
+        },
+      });
+  
+      console.log("✅ File saved to DB");
+  
+      // Redirect back to the right folder
+      if (!folderId) {
+        return res.redirect("/folders/root");
+      } else {
+        return res.redirect(`/folders/${folderId}`);
+      }
+  
+    } catch (err) {
+      console.error("❌ Error uploading file:", err);
+      res.status(500).send("Error uploading file");
+    }
+};
 
 exports.deleteFile = async(req,res) => {
     const {id,parentId} = req.body;

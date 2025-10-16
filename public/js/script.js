@@ -79,7 +79,7 @@ closeBtn2.onclick = function() {
 
 // For viewing file details
 document.addEventListener("DOMContentLoaded", () => {
-    const fileContainer = document.querySelectorAll(".file-container");
+    const fileDetail = document.querySelectorAll("#file-detail");
     const fileName = document.querySelector(".file-name");
     const fileDate = document.querySelector(".file-date");
     const fileType = document.querySelector(".file-type");
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const fileId = document.querySelector("#file-id-download");
     const downloadForm = document.querySelector("#download-form");
 
-    fileContainer.forEach((item) => {
+    fileDetail.forEach((item) => {
         item.addEventListener('click', async (e) => {
             fileInfo.style.display = "block";
             const name = item.getAttribute("data-name");

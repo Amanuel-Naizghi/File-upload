@@ -72,14 +72,20 @@
       <% }) %>
       <div class="files">
         <% files.forEach(file => { %>
-          <div class="file-container" id="<%= file.id %>" data-name="<%= file.filename %>" data-date="<%= file.createdAt %>" data-type="<%= file.mimetype %>">
-            <p>📄 <%= file.filename %></p>
-            <form action="/deleteFile/<%= file.id %>" method="post">
-              <input type="hidden" name="id" value="<%= file.id %>">
-              <input type="hidden" name="parentId" value="<%= file.folderId ? file.folderId : 'root' %>">
-              <button type="submit" onclick="return confirm('Are you sure you want to delete it?');" > Delete </button>
-            </form>
-            <button data-name="<%= file.filename %>" data-id="<%= file.id %>" data-parent-id="<%= file.folderId ? file.folderId : 'root' %>" id="edit2" class="edit-file-btn" >Edit</button>
+          <div class="file-container">
+            <img id="file-detail" data-name="<%= file.filename %>" data-date="<%= file.createdAt %>" data-type="<%= file.mimetype %>" src="/images/file.png" alt="file" width="50px" height="50px">
+            <div class="name-edit-delete">
+              <p class="name" id="file-detail" data-name="<%= file.filename %>" data-date="<%= file.createdAt %>" data-type="<%= file.mimetype %>"><%= file.filename %></p>
+              <button class="edit-delete" id="<%= file.name %>" data-id="<%= file.id %>">⋮</button>
+            </div>
+            <div class="edit-delete-container" id="<%= file.id %>">
+              <form action="/deleteFile/<%= file.id %>" method="post">
+                <input type="hidden" name="id" value="<%= file.id %>">
+                <input type="hidden" name="parentId" value="<%= file.folderId ? file.folderId : 'root' %>">
+                <button type="submit" onclick="return confirm('Are you sure you want to delete it?');" > Delete </button>
+              </form>
+              <button data-name="<%= file.filename %>" data-id="<%= file.id %>" data-parent-id="<%= file.folderId ? file.folderId : 'root' %>" id="edit2" class="edit-file-btn" >Edit</button>
+            </div>
           </div>
         <% }) %>
       </div>
