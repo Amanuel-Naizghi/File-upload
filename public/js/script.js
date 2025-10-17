@@ -5,6 +5,7 @@ const modal3 = document.getElementById("myModal3");
 const newFolder = document.getElementById("newFolder");
 const closeBtn = document.getElementById("closeModalBtn");
 const closeBtn2 = document.getElementById("closeModalBtn2");
+const closeBtn3 = document.getElementById("closeModalBtn3");
 const editDelete = document.querySelectorAll(".edit-delete");
 const editDeleteContainer = document.querySelectorAll(".edit-delete-container");
 const editBtn = document.querySelectorAll("#edit");
@@ -77,6 +78,11 @@ closeBtn2.onclick = function() {
     modal2.style.display = "none";
 }
 
+// Close modal for editing a folder
+closeBtn3.onclick = function() {
+    modal3.style.display = "none";
+}
+
 // For viewing file details
 document.addEventListener("DOMContentLoaded", () => {
     const fileDetail = document.querySelectorAll("#file-detail");
@@ -126,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 // Used for editing the name of the file for passing the folder name into the input field of the modal for editing
   document.addEventListener("DOMContentLoaded", () => {
-    const editButtons = document.querySelectorAll(".edit-file-btn");
+    const editButtons = document.querySelectorAll("#edit2");
     const fileParentIdInput = document.getElementById("editFileParentId");
     const fileNameInput = document.getElementById("editFileName");
     const fileIdInput = document.getElementById("editFileId");
