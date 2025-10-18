@@ -10,31 +10,38 @@ body{
     background:#F5F5F0;
     color:#3F2305;
     margin:0;
-    padding:0;
 }
-.folders-page-container{
+.folder-page{
+    position:relative;
+    height:100vh;
+    width:100vw;
+    font-family:"myFont2";
+}
+#folders-page-container{
     display:flex;
     flex-direction: column;
+    width:100%;
+    height:100%;
 }
-.folders-page-container>.header{
+#folders-page-container>.header{
     display:flex;
     justify-content: space-between;
 }
-.folders-page-container>.header>.header-left{
+#folders-page-container>.header>.header-left{
     display:flex;
     padding-left:0.3rem;
 }
-.folders-page-container>.header>.header-left>img{
+#folders-page-container>.header>.header-left>img{
     margin-top:0.5rem;
 }
-.folders-page-container>.header>.header-left>p{
+#folders-page-container>.header>.header-left>p{
     font-family: "myFont1";
     font-size:1.7rem;
 }
-.folders-page-container>.header>.header-right{
+#folders-page-container>.header>.header-right{
     align-self:center;
 }
-.folders-page-container>.header>.header-right>a{
+#folders-page-container>.header>.header-right>a{
     font-family:"myFont2";
     margin-right:1rem;
     text-decoration: none;
@@ -49,29 +56,29 @@ body{
     justify-content: center;
     align-items:center;
 }
-.folders-page-container>.header>.header-right>a>img{
+#folders-page-container>.header>.header-right>a>img{
    margin-right:0.5rem;
 }
-.folders-page-container>.header>.header-right>a:hover{
+#folders-page-container>.header>.header-right>a:hover{
     background-color: #563e25 ;
 }
-.folders-page-container>.gap{
+#folders-page-container>.gap{
    background: #3F2305;
    height:5px;
    width:100%;
    margin-bottom: 0.5rem;
 }
-.folders-page-container>.directory-locator{
+#folders-page-container>.directory-locator{
     padding:0.3rem;
 }
-.folders-page-container>.directory-locator>a{
+#folders-page-container>.directory-locator>a{
     text-decoration:none;
     color:rgb(114, 114, 114);
 }
-.folders-page-container>.directory-locator>a:hover{
+#folders-page-container>.directory-locator>a:hover{
     color:rgb(195, 195, 195);
 }
-.folders-page-container>.directory-locator>span{
+#folders-page-container>.directory-locator>span{
     color:white;
     background:#4d3216;
     border-radius:50%;
@@ -81,14 +88,39 @@ body{
     width:15px;
     display:inline-block;
     margin:0.2rem 0.1rem;
-    padding:0.1rem;
     text-align: center;
 }
-.folders-page-container>.folders-files-container{
+#folders-page-container>.folders-files-container{
     display:flex;
     padding:1rem;
+    flex-direction: column;
 }
-.folders-page-container>.folders-files-container>.folder{
+#folders-page-container>.folders-files-container>.new-folder-file-container{
+    margin-bottom: 1rem;
+    display:flex;
+}
+#folders-page-container>.folders-files-container>.new-folder-file-container>button{
+    background: #563e25;
+    color:whitesmoke;
+    font-size:0.9rem;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    margin-right:0.2rem;
+    border:none;
+    padding:0.3rem 0.5rem;
+    border-radius:10px;
+}
+#folders-page-container>.folders-files-container>.new-folder-file-container>button:hover{
+    background: #5b4a39;
+}
+#folders-page-container>.folders-files-container>.new-folder-file-container>button>img{
+    margin-right:0.3rem;
+}
+#folders-page-container>.folders-files-container>.folders-files-content{
+    display:flex;
+}
+#folders-page-container>.folders-files-container .folder{
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -97,7 +129,7 @@ body{
     height:80px;
     position:relative;
 }
-.folders-page-container>.folders-files-container>.folder>.folder-container,.files>.file-container{
+#folders-page-container>.folders-files-container .folder>.folder-container,.files>.file-container{
     display:flex;
     flex-direction: column;
     height:75px;
@@ -106,19 +138,19 @@ body{
     padding:0.4rem;
     position:relative;
 }
-.folders-page-container>.folders-files-container>.folder>.folder-container:hover, .files>.file-container:hover{
+#folders-page-container>.folders-files-container .folder>.folder-container:hover, .files>.file-container:hover{
     background-color: #d7d7d7;
 }
-.folders-page-container>.folders-files-container>.folder a{
+#folders-page-container>.folders-files-container .folder a{
     text-decoration: none;
     color:rgb(114, 114, 114);
     height:50px;
 }
-.folders-page-container>.folders-files-container>.folder .name-edit-delete, .files>.file-container>.name-edit-delete{
+#folders-page-container>.folders-files-container .folder .name-edit-delete, .files>.file-container>.name-edit-delete{
     display:flex;
     width:100px;
 }
-.folders-page-container>.folders-files-container>.folder .name-edit-delete>button, .files>.file-container>.name-edit-delete>button{
+#folders-page-container>.folders-files-container .folder .name-edit-delete>button, .files>.file-container>.name-edit-delete>button{
     width:20px;
     height:20px;
     display:flex;
@@ -128,10 +160,10 @@ body{
     border:none;
     background:none;
 }
-.folders-page-container>.folders-files-container>.folder .name-edit-delete>button:hover, .files>.file-container>.name-edit-delete>button:hover{
+#folders-page-container>.folders-files-container .folder .name-edit-delete>button:hover, .files>.file-container>.name-edit-delete>button:hover{
     color:#898179;
 }
-.folders-page-container>.folders-files-container>.folder .name-edit-delete>a, .files>.file-container>.name-edit-delete>.name{
+#folders-page-container>.folders-files-container .folder .name-edit-delete>a, .files>.file-container>.name-edit-delete>.name{
     text-decoration: none;
     color:rgb(114, 114, 114);
     text-align: center;
@@ -139,11 +171,11 @@ body{
     text-overflow: ellipsis;
     white-space:nowrap;
 }
-.folders-page-container>.folders-files-container>.folder>.edit-delete-container, .file-container>.edit-delete-container{
+#folders-page-container>.folders-files-container .folder>.edit-delete-container, .file-container>.edit-delete-container{
     position:absolute;
     top:100%;
 }
-.folders-page-container>.folders-files-container>.folder>.edit-delete-container .delete, .file-container .delete{
+#folders-page-container>.folders-files-container .folder>.edit-delete-container .delete, .file-container .delete{
     width:3.2rem;
     height:1.2rem;
     color:rgb(26, 26, 26);
@@ -151,10 +183,10 @@ body{
     border:none;
     text-align: start;
 }
-.folders-page-container>.folders-files-container>.folder>.edit-delete-container .delete:hover, .file-container .delete:hover{
+#folders-page-container>.folders-files-container .folder>.edit-delete-container .delete:hover, .file-container .delete:hover{
     background-color: #c7c7c7;
 }
-.folders-page-container>.folders-files-container>.folder>.edit-delete-container .edit-btn, .file-container .edit-btn{
+#folders-page-container>.folders-files-container .folder>.edit-delete-container .edit-btn, .file-container .edit-btn{
     width:3.2rem;
     height:1.2rem;
     color:rgb(26, 26, 26);
@@ -163,22 +195,62 @@ body{
     border-top:1px solid rgb(149, 147, 147);
     text-align: start;
 }
-.folders-page-container>.folders-files-container>.folder>.edit-delete-container .edit-btn:hover, .file-container .edit-btn:hover{
+#folders-page-container>.folders-files-container .folder>.edit-delete-container .edit-btn:hover, .file-container .edit-btn:hover{
     background-color: #c7c7c7;
 }
-.folders-page-container>.folders-files-container>.files{
+#folders-page-container>.folders-files-container .files{
     display:flex;
     height:80px;
 }
-.folders-page-container>.folders-files-container>.files>.file-container{
+#folders-page-container>.folders-files-container .files>.file-container{
     display:flex;
     flex-direction:column;
     padding-bottom: 0;
 }
-.folders-page-container>.folders-files-container>.files>.file-container>img{
+#folders-page-container>.folders-files-container .files>.file-container>img{
     width:40px;
     height:40px;
 }
 .files>.file-container>.name-edit-delete>.name{
     margin:0.4rem 0rem 0rem 0rem;
+}
+.bluer{
+    filter: blur(3px);
+    background-color: rgba(136, 136, 136, 0.2);
+ }
+ .folder-page>#myModal{
+    display:none;
+    position:absolute;
+    top:35%;
+    left:35%;
+    width:250px;
+    height:115px;
+    background-color: #54483c;
+    color:whitesmoke;
+    padding:0.5rem;
+    border-radius: 10px;
+}
+.folder-page>#myModal>.modal-content{
+    display:flex;
+    flex-direction:column;
+}
+.folder-page>#myModal>.modal-content>span{
+    align-self: flex-end;
+}
+.folder-page>#myModal>.modal-content>form{
+    display:flex;
+    flex-direction:column;
+}
+.folder-page>#myModal>.modal-content>form>input{
+    border-radius: 5px;
+    border:none;
+    margin-bottom: 1rem;
+    padding:0.2rem;
+    height:1.2rem;
+}
+.folder-page>#myModal>.modal-content>form>button{
+    border-radius: 5px;
+    border:none;
+    width:100px;
+    align-self: center;;
 }

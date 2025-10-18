@@ -4,9 +4,6 @@
   <title>Folders</title>
   <link rel="stylesheet" href="/styles/folders.css">
   <style>
-    #myModal{
-        display:none;
-    }
     .file-modal{
         display:none;
     }
@@ -26,83 +23,114 @@
   </style>
 </head>
 <body>
-  <div class="folders-page-container">
-    <div class="header">
-      <div class="header-left">
-        <p>File Saver</p>
-      </div>
-      <div class="header-right">
-        <a href="/login"><img src="/images/logout2.png" alt="Logout">Logout</a>
-      </div>
-    </div>
-    <div class="gap"></div>
-    <div class="directory-locator">
-      <% if(directoryArray.length > 0){ %>
-          <% directoryArray.forEach(item =>{%>
-              <% if(item.name === 'root'){ %>
-                  <a href="/folders/root"><%= item.name %></a>
-              <%}%>
-              <% if(item.name !== 'root') { %>
-                  <span>></span>
-                  <a href="/folders/<%= item.id %>"><%= item.name %></a>
-              <%}%>
-          <%});%>
-      <%}%>
-      
-    </div>
-    <div class="folders-files-container">
-      <div class="new-folder-file-container">
-        <button id="newFolder">New Folder</button>
-        <button id="newFile">New File</button>
-      </div>
-      <% folders.forEach(f => { %>
-        <div class="folder">
-          <div class="folder-container">
-            <a href="/folders/<%= f.id %>">
-              <img src="/images/folder.png" alt="folder">
-            </a>
-            <div class="name-edit-delete">
-              <a href="/folders/<%= f.id %>" class="folder-name"><%= f.name %></a>
-              <button class="edit-delete" id="<%= f.name %>" data-id="<%= f.id %>">⋮</button>
-            </div>
-          </div>
-          
-          <div class="edit-delete-container" id="<%= f.id %>">
-              <form action="/delete/<%= f.id %>" method="post">
-                  <input type="hidden" name="id" value="<%= f.id %>">
-                  <input type="hidden" name="parentId" value="<%= f.parentId ? f.parentId : 'root' %>">
-                  <button id="delete" class="delete" onclick="return confirm('Are you sure you want to delete it?');" >Delete</button>
-              </form>
-              <button data-name="<%= f.name %>" data-id="<%= f.id %>" data-parent-id="<%= f.parentId ? f.parentId : 'root' %>" id="edit" class="edit-btn" >Edit</button>
-          </div>              
+  <div class="folder-page">
+    <div id="folders-page-container">
+      <div class="header">
+        <div class="header-left">
+          <p>File Saver</p>
         </div>
-      <% }) %>
-      <div class="files">
-        <% files.forEach(file => { %>
-          <div class="file-container">
-            <img id="file-detail" data-name="<%= file.filename %>" data-date="<%= file.createdAt %>" data-type="<%= file.mimetype %>" src="/images/file.png" alt="file">
-            <div class="name-edit-delete">
-              <p class="name" id="file-detail" data-name="<%= file.filename %>" data-date="<%= file.createdAt %>" data-type="<%= file.mimetype %>"><%= file.filename %></p>
-              <button class="edit-delete" id="<%= file.name %>" data-id="<%= file.id %>">⋮</button>
-            </div>
-            <div class="edit-delete-container" id="<%= file.id %>">
-              <form action="/deleteFile/<%= file.id %>" method="post">
-                <input type="hidden" name="id" value="<%= file.id %>">
-                <input type="hidden" name="parentId" value="<%= file.folderId ? file.folderId : 'root' %>">
-                <button type="submit" class="delete" onclick="return confirm('Are you sure you want to delete it?');" > Delete </button>
-              </form>
-              <button data-name="<%= file.filename %>" data-id="<%= file.id %>" data-parent-id="<%= file.folderId ? file.folderId : 'root' %>" id="edit2" class="edit-btn" >Edit</button>
-            </div>
-          </div>
-        <% }) %>
+        <div class="header-right">
+          <a href="/login"><img src="/images/logout2.png" alt="Logout">Logout</a>
+        </div>
       </div>
+      <div class="gap"></div>
+      <div class="directory-locator">
+        <% if(directoryArray.length > 0){ %>
+            <% directoryArray.forEach(item =>{%>
+                <% if(item.name === 'root'){ %>
+                    <a href="/folders/root"><%= item.name %></a>
+                <%}%>
+                <% if(item.name !== 'root') { %>
+                    <span>></span>
+                    <a href="/folders/<%= item.id %>"><%= item.name %></a>
+                <%}%>
+            <%});%>
+        <%}%>
+        
+      </div>
+      <div class="folders-files-container">
+        <div class="new-folder-file-container">
+          <button id="newFolder"><img src="/images/addFolder.png" alt="Add folder">New Folder</button>
+          <button id="newFile"><img src="/images/addFile.png" alt="Add file">New File</button>
+        </div>
+        <div class="folders-files-content">
+          <% folders.forEach(f => { %>
+            <div class="folder">
+              <div class="folder-container">
+                <a href="/folders/<%= f.id %>">
+                  <img src="/images/folder.png" alt="folder">
+                </a>
+                <div class="name-edit-delete">
+                  <a href="/folders/<%= f.id %>" class="folder-name"><%= f.name %></a>
+                  <button class="edit-delete" id="<%= f.name %>" data-id="<%= f.id %>">⋮</button>
+                </div>
+              </div>
+              
+              <div class="edit-delete-container" id="<%= f.id %>">
+                  <form action="/delete/<%= f.id %>" method="post">
+                      <input type="hidden" name="id" value="<%= f.id %>">
+                      <input type="hidden" name="parentId" value="<%= f.parentId ? f.parentId : 'root' %>">
+                      <button id="delete" class="delete" onclick="return confirm('Are you sure you want to delete it?');" >Delete</button>
+                  </form>
+                  <button data-name="<%= f.name %>" data-id="<%= f.id %>" data-parent-id="<%= f.parentId ? f.parentId : 'root' %>" id="edit" class="edit-btn" >Edit</button>
+              </div>              
+            </div>
+          <% }) %>
+          <div class="files">
+            <% files.forEach(file => { %>
+              <div class="file-container" data-name="<%= file.filename %>" data-date="<%= file.createdAt %>" data-type="<%= file.mimetype %>">
+                <img src="/images/file.png" alt="file">
+                <div class="name-edit-delete">
+                  <p class="name" ><%= file.filename %></p>
+                  <button class="edit-delete" id="<%= file.name %>" data-id="<%= file.id %>">⋮</button>
+                </div>
+                <div class="edit-delete-container" id="<%= file.id %>">
+                  <form action="/deleteFile/<%= file.id %>" method="post">
+                    <input type="hidden" name="id" value="<%= file.id %>">
+                    <input type="hidden" name="parentId" value="<%= file.folderId ? file.folderId : 'root' %>">
+                    <button type="submit" class="delete" onclick="return confirm('Are you sure you want to delete it?');" > Delete </button>
+                  </form>
+                  <button data-name="<%= file.filename %>" data-id="<%= file.id %>" data-parent-id="<%= file.folderId ? file.folderId : 'root' %>" id="edit2" class="edit-btn" >Edit</button>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+        
+      </div>
+    
+      <!-- File detail information -->
+      <div class="file-info">
+        <div class="file-image">
+          <img src="/images/file.png" alt="File">
+        </div>
+        <div class="file-name-container">
+          <span>File Name: </span>
+          <p class="file-name"> </p>
+        </div>
+        <div class="file-date-container">
+          <span>Created At: </span>
+          <p class="file-date"></p>
+        </div>
+        <div class="file-type-container">
+          <span>File type: </span>
+          <p class="file-type"></p>
+        </div>
+        <form action="/download" method="get" id="download-form">
+          <button type="submit" id="file-id-download">Download File</button>
+        </form>
+      </div>
+    
+      <a href="javascript:history.back()">Back to previous page</a>
+  
     </div>
+
     <!-- The Modal for creating a folder --> 
     <div id="myModal" class="modal">
       <div class="modal-content">
         <span id="closeModalBtn" class="close">&times;</span>
         <form action="/folders" method="post">
-          <label>Folder name</label><br>
+          <label>Folder name</label>
           <input type="hidden" name="parentId" value="<%= folder ? folder.id : '' %>">
           <input type="text" name="folderName" placeholder="New Folder Name" required>
           <button type="submit">Submit</button>
@@ -145,32 +173,8 @@
         </form>
       </div>
     </div>
-  
-    <!-- File detail information -->
-    <div class="file-info">
-      <div class="file-image">
-        <img src="/images/file.png" alt="File">
-      </div>
-      <div class="file-name-container">
-        <span>File Name: </span>
-        <p class="file-name"> </p>
-      </div>
-      <div class="file-date-container">
-        <span>Created At: </span>
-        <p class="file-date"></p>
-      </div>
-      <div class="file-type-container">
-        <span>File type: </span>
-        <p class="file-type"></p>
-      </div>
-      <form action="/download" method="get" id="download-form">
-        <button type="submit" id="file-id-download">Download File</button>
-      </form>
-    </div>
-  
-    <a href="javascript:history.back()">Back to previous page</a>
-
   </div>
+  
 
   <script src="/js/script.js"></script>
 

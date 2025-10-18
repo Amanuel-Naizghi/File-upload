@@ -13,10 +13,12 @@ const editDelete = document.querySelectorAll(".edit-delete");
 const editDeleteContainer = document.querySelectorAll(".edit-delete-container");
 const editBtn = document.querySelectorAll("#edit");
 const editBtn2 = document.querySelectorAll("#edit2");
+const mainPage = document.getElementById("folders-page-container");
 
 // Open modal for creating a new folder
 newFolder.onclick = function() {
     modal.style.display = "block";
+    mainPage.classList.add("bluer")
 }
 
 //Open modal for adding a new file
@@ -27,20 +29,24 @@ newFile.onclick = function() {
 // Close modal for creating a folder
 closeBtn.onclick = function() {
     modal.style.display = "none";
+    mainPage.classList.remove("bluer");
 }
 
 // Close modal for adding a file
 closeFileBtn.onclick = function() {
     fileModal.style.display = "none";
+    mainPage.classList.remove("bluer");
 }
 
 // Close modal if clicking outside of it
 window.onclick = function(e) {
     if(!modal.contains(e.target) && modal.style.display === "block" && e.target !== newFolder){
         modal.style.display = "none";
+        mainPage.classList.remove("bluer");
     }
     if(!fileModal.contains(e.target) && fileModal.style.display === "block" && e.target !== newFile){
         fileModal.style.display = "none";
+        mainPage.classList.remove("bluer");
     }
 }
 
@@ -96,7 +102,7 @@ closeBtn3.onclick = function() {
 
 // For viewing file details
 document.addEventListener("DOMContentLoaded", () => {
-    const fileDetail = document.querySelectorAll("#file-detail");
+    const fileDetail = document.querySelectorAll(".file-container");
     const fileName = document.querySelector(".file-name");
     const fileDate = document.querySelector(".file-date");
     const fileType = document.querySelector(".file-type");
@@ -106,17 +112,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fileDetail.forEach((item) => {
         item.addEventListener('click', async (e) => {
-            fileInfo.style.display = "block";
-            const name = item.getAttribute("data-name");
-            const date = item.getAttribute("data-date");
-            const type = item.getAttribute("data-type");
-            const id = item.id;
+            const clickedInsideEditDelete = Array.from(editDelete).some( item => item.contains(e.target));
+            if( !clickedInsideEditDelete ){
+                fileInfo.style.display = "block";
+                const name = item.getAttribute("data-name");
+                const date = item.getAttribute("data-date");
+                const type = item.getAttribute("data-type");
+                const id = item.id;
 
-            fileName.textContent = name;
-            fileDate.textContent = date.toString().replace(/ GMT.*/, '');
-            fileType.textContent = type;
-            fileId.id = id;
-            downloadForm.action = `/download/${id}`;//We are giving an action for the form based on the id of the item clicked
+                fileName.textContent = name;
+                fileDate.textContent = date.toString().replace(/ GMT.*/, '');
+                fileType.textContent = type;
+                fileId.id = id;
+                downloadForm.action = `/download/${id}`;//We are giving an action for the form based on the id of the item clicked
+            }
         })
     })
 })
