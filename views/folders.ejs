@@ -4,7 +4,10 @@
   <title>Folders</title>
   <link rel="stylesheet" href="/styles/folders.css">
   <style>
-    .modal{
+    #myModal{
+        display:none;
+    }
+    .file-modal{
         display:none;
     }
     .modal2{
@@ -48,6 +51,10 @@
       
     </div>
     <div class="folders-files-container">
+      <div class="new-folder-file-container">
+        <button id="newFolder">New Folder</button>
+        <button id="newFile">New File</button>
+      </div>
       <% folders.forEach(f => { %>
         <div class="folder">
           <div class="folder-container">
@@ -90,8 +97,7 @@
         <% }) %>
       </div>
     </div>
-    <!-- The Modal for creating a folder -->
-    <button id="newFolder">New Folder</button>
+    <!-- The Modal for creating a folder --> 
     <div id="myModal" class="modal">
       <div class="modal-content">
         <span id="closeModalBtn" class="close">&times;</span>
@@ -105,11 +111,14 @@
     </div>
   
     <!-- For adding a file -->
-    <form action="/uploadFile" method="post" enctype="multipart/form-data">
-      <input type="hidden" name="folderId" value="<%= folder ? folder.id: null %>">
-      <input type="file" name="file" required>
-      <button type="submit">Add File</button>
-    </form>
+    <div class="file-modal">
+      <span id="closeFileModalBtn" class="close">&times;</span>
+      <form action="/uploadFile" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="folderId" value="<%= folder ? folder.id: null %>">
+        <input type="file" name="file" required>
+        <button type="submit">Add File</button>
+      </form>
+    </div>
   
     <!-- The Modal for editing a folder -->
     <div id="myModal2" class="modal2">

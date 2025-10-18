@@ -1,9 +1,12 @@
 
 const modal = document.getElementById("myModal");
+const fileModal = document.querySelector(".file-modal");
 const modal2 = document.getElementById("myModal2");
 const modal3 = document.getElementById("myModal3");
 const newFolder = document.getElementById("newFolder");
+const newFile = document.getElementById("newFile");
 const closeBtn = document.getElementById("closeModalBtn");
+const closeFileBtn = document.getElementById("closeFileModalBtn");
 const closeBtn2 = document.getElementById("closeModalBtn2");
 const closeBtn3 = document.getElementById("closeModalBtn3");
 const editDelete = document.querySelectorAll(".edit-delete");
@@ -11,29 +14,38 @@ const editDeleteContainer = document.querySelectorAll(".edit-delete-container");
 const editBtn = document.querySelectorAll("#edit");
 const editBtn2 = document.querySelectorAll("#edit2");
 
-// Open modal
+// Open modal for creating a new folder
 newFolder.onclick = function() {
     modal.style.display = "block";
-    newFolder.style.display = "none";
+}
+
+//Open modal for adding a new file
+newFile.onclick = function() {
+    fileModal.style.display = "block";
 }
 
 // Close modal for creating a folder
 closeBtn.onclick = function() {
     modal.style.display = "none";
-    newFolder.style.display = "block";
+}
+
+// Close modal for adding a file
+closeFileBtn.onclick = function() {
+    fileModal.style.display = "none";
 }
 
 // Close modal if clicking outside of it
-// window.onclick = function(event) {
-//     if (event.target === modal) {
-//     modal.style.display = "none";
-//     newFolder.style.display = "block";
-//     }
-//     if (event.target === modal2) {
-//     modal2.style.display = "none";
-//     }
-// }
+window.onclick = function(e) {
+    if(!modal.contains(e.target) && modal.style.display === "block" && e.target !== newFolder){
+        modal.style.display = "none";
+    }
+    if(!fileModal.contains(e.target) && fileModal.style.display === "block" && e.target !== newFile){
+        fileModal.style.display = "none";
+    }
+}
 
+
+//Used for closing the edit delete buttons after a user clicks outside of its container
 document.addEventListener("DOMContentLoaded", () => {
     
     document.addEventListener('click', (e) => {
@@ -44,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 });
-
 
 //Open edit and delete options
 editDelete.forEach(item => {
