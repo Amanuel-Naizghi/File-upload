@@ -14,6 +14,7 @@ const editDeleteContainer = document.querySelectorAll(".edit-delete-container");
 const editBtn = document.querySelectorAll("#edit");
 const editBtn2 = document.querySelectorAll("#edit2");
 const mainPage = document.getElementById("folders-page-container");
+const closeFileInfo = document.getElementById("closeFileInfo");
 
 // Open modal for creating a new folder
 newFolder.onclick = function() {
@@ -128,7 +129,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         })
     })
-})
+});
+
+// Close file details modal
+closeFileInfo.onclick = function(){
+    const fileInfo = document.querySelector(".file-info");
+    fileInfo.style.display = "none";
+}
 
 // Used for editing the name of the folder for passing the folder name into the input field of the modal for editing
 document.addEventListener("DOMContentLoaded", () => {

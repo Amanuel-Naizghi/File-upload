@@ -3,24 +3,6 @@
 <head>
   <title>Folders</title>
   <link rel="stylesheet" href="/styles/folders.css">
-  <style>
-    .file-modal{
-        display:none;
-    }
-    .modal2{
-        display:none;
-    }
-    .modal3{
-        display:none;
-    }
-    .edit-delete-container{
-        display:none;
-    }
-    .file-info{
-        display:none;
-    }
-
-  </style>
 </head>
 <body>
   <div class="folder-page">
@@ -95,34 +77,35 @@
               </div>
             <% }) %>
           </div>
-        </div>
-        
+        </div>     
       </div>
-    
-      <!-- File detail information -->
-      <div class="file-info">
+      <a href="javascript:history.back()">Back to previous page</a>
+  
+    </div>
+
+     <!-- File detail information -->
+     <div class="file-info">
+      <div class="file-info-container">
+        <span id="closeFileInfo" class="close">&times;</span>
         <div class="file-image">
-          <img src="/images/file.png" alt="File">
+          <img src="/images/file2.png" alt="File">
         </div>
         <div class="file-name-container">
-          <span>File Name: </span>
+          <p class="file-description">File Name: </p>
           <p class="file-name"> </p>
         </div>
         <div class="file-date-container">
-          <span>Created At: </span>
+          <p class="file-description">Created At: </p>
           <p class="file-date"></p>
         </div>
         <div class="file-type-container">
-          <span>File type: </span>
+          <p class="file-description">File type: </p>
           <p class="file-type"></p>
         </div>
         <form action="/download" method="get" id="download-form">
           <button type="submit" id="file-id-download">Download File</button>
         </form>
       </div>
-    
-      <a href="javascript:history.back()">Back to previous page</a>
-  
     </div>
 
     <!-- The Modal for creating a folder --> 
@@ -140,12 +123,14 @@
   
     <!-- For adding a file -->
     <div class="file-modal">
-      <span id="closeFileModalBtn" class="close">&times;</span>
-      <form action="/uploadFile" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="folderId" value="<%= folder ? folder.id: null %>">
-        <input type="file" name="file" required>
-        <button type="submit">Add File</button>
-      </form>
+      <div class="modal-content">
+        <span id="closeFileModalBtn" class="close">&times;</span>
+        <form action="/uploadFile" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="folderId" value="<%= folder ? folder.id: null %>">
+          <input type="file" name="file" required>
+          <button type="submit">Add File</button>
+        </form>
+      </div>
     </div>
   
     <!-- The Modal for editing a folder -->
@@ -163,7 +148,7 @@
   
     <!-- The Modal for editing a file -->
     <div id="myModal3" class="modal3">
-      <div class="modal-content2">
+      <div class="modal-content3">
         <span id="closeModalBtn3" class="close2">&times;</span>
         <form action="/editFile" method="post">
           <input type="hidden" name="id" id="editFileId" >

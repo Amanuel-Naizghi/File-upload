@@ -85,6 +85,7 @@ body{
     padding:0.1rem;
     font-weight: bolder;
     height:15px;
+    line-height: 15px;
     width:15px;
     display:inline-block;
     margin:0.2rem 0.1rem;
@@ -174,6 +175,7 @@ body{
 #folders-page-container>.folders-files-container .folder>.edit-delete-container, .file-container>.edit-delete-container{
     position:absolute;
     top:100%;
+    display:none;
 }
 #folders-page-container>.folders-files-container .folder>.edit-delete-container .delete, .file-container .delete{
     width:3.2rem;
@@ -218,7 +220,7 @@ body{
     filter: blur(3px);
     background-color: rgba(136, 136, 136, 0.2);
  }
- .folder-page>#myModal{
+ .folder-page>#myModal,.folder-page>.file-modal,.folder-page>.modal2,.folder-page>.modal3{
     display:none;
     position:absolute;
     top:35%;
@@ -230,27 +232,79 @@ body{
     padding:0.5rem;
     border-radius: 10px;
 }
-.folder-page>#myModal>.modal-content{
+.folder-page>.file-modal,.folder-page>.modal2,.folder-page>.modal3{
+    height:90px;
+}
+.folder-page>#myModal>.modal-content,.folder-page>.file-modal>.modal-content,.folder-page>.modal2>.modal-content2,.folder-page>.modal3>.modal-content3{
     display:flex;
     flex-direction:column;
 }
-.folder-page>#myModal>.modal-content>span{
+.folder-page>#myModal>.modal-content>span,.file-modal>.modal-content>span,.folder-page>.modal2>.modal-content2>span,.folder-page>.modal3>.modal-content3>span{
     align-self: flex-end;
 }
-.folder-page>#myModal>.modal-content>form{
+.folder-page>#myModal>.modal-content>form,.file-modal>.modal-content>form,.modal2>.modal-content2>form,.modal3>.modal-content3>form {
     display:flex;
     flex-direction:column;
 }
-.folder-page>#myModal>.modal-content>form>input{
+.folder-page>#myModal>.modal-content>form>input,.file-modal>.modal-content>form>input,.modal2>.modal-content2>form>input,.modal3>.modal-content3>form>input{
     border-radius: 5px;
     border:none;
     margin-bottom: 1rem;
     padding:0.2rem;
     height:1.2rem;
 }
-.folder-page>#myModal>.modal-content>form>button{
+.folder-page>#myModal>.modal-content>form>button,.file-modal>.modal-content>form>button,.modal2>.modal-content2>form>button,.modal3>.modal-content3>form>button{
     border-radius: 5px;
     border:none;
     width:100px;
-    align-self: center;;
+    align-self: center;
+    font-size:0.8rem;
+    height:1.2rem;
+    color:rgb(91, 90, 90);
+}
+.folder-page>#myModal>.modal-content>form>button:hover,.file-modal>.modal-content>form>button:hover,.modal2>.modal-content2>form>button:hover,.modal3>.modal-content3>form>button:hover{
+    background-color: lightgray;
+}
+.folder-page>.file-info{
+    display:none;
+    position:absolute;
+    top:55%;
+    left:72%;
+    width:300px;
+    background-color: lightgray;
+    color:rgb(91, 90, 90);
+    border-radius: 10px;
+    padding:1rem 0.8rem;
+}
+.folder-page>.file-info>.file-info-container{
+    display:flex;
+    flex-direction:column;
+}
+.folder-page>.file-info>.file-info-container>span{
+    align-self:flex-end;
+}
+.folder-page>.file-info>.file-info-container img{
+    width:65px;
+    height:65px;
+}
+.folder-page>.file-info>.file-info-container>div{
+    display: flex;
+}
+.folder-page>.file-info>.file-info-container>div>.file-description{
+    margin-right:0.3rem;
+    font-weight:600;
+    color:rgb(44, 44, 44);
+}
+.folder-page>.file-info>.file-info-container>form{
+    align-self:center;
+}
+.folder-page>.file-info>.file-info-container>form>button{
+    background-color:#4d3216;
+    color:antiquewhite;
+    border-radius:10px;
+    padding:0.3rem;
+    border:none;
+}
+.folder-page>.file-info>.file-info-container>form>button:hover{
+    background-color:#503d29;
 }
