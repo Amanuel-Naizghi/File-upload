@@ -19,7 +19,7 @@ const closeFileInfo = document.getElementById("closeFileInfo");
 // Open modal for creating a new folder
 newFolder.onclick = function() {
     modal.style.display = "block";
-    mainPage.classList.add("bluer")
+    mainPage.classList.add("bluer");
 }
 
 //Open modal for adding a new file
@@ -41,12 +41,22 @@ closeFileBtn.onclick = function() {
 
 // Close modal if clicking outside of it
 window.onclick = function(e) {
+    const clickedInsideEditButton = Array.from(editBtn).some( item => item.contains(e.target));
+    const clickedInsideEditButton2 = Array.from(editBtn2).some( item => item.contains(e.target));
     if(!modal.contains(e.target) && modal.style.display === "block" && e.target !== newFolder){
         modal.style.display = "none";
         mainPage.classList.remove("bluer");
     }
     if(!fileModal.contains(e.target) && fileModal.style.display === "block" && e.target !== newFile){
         fileModal.style.display = "none";
+        mainPage.classList.remove("bluer");
+    }
+    if(!modal2.contains(e.target) && modal2.style.display === "block" && !clickedInsideEditButton){
+        modal2.style.display = "none";
+        mainPage.classList.remove("bluer");
+    }
+    if(!modal3.contains(e.target)&& modal3.style.display === "block" && !clickedInsideEditButton2){
+        modal3.style.display = "none";
         mainPage.classList.remove("bluer");
     }
 }
@@ -82,12 +92,14 @@ editDelete.forEach(item => {
 editBtn.forEach((item) => {
     item.addEventListener('click', async  (e) => {
     modal2.style.display = "block";
+    mainPage.classList.add("bluer");
     })
 });
 //Adding action listener for the edit button of a file
 editBtn2.forEach((item) => {
     item.addEventListener('click', async  (e) => {
     modal3.style.display = "block";
+    mainPage.classList.add("bluer");
     })
 });
 
