@@ -36,6 +36,10 @@
           <button id="newFile"><img src="/images/addFile.png" alt="Add file">New File</button>
         </div>
         <div class="side-nav-container">
+          <div class="user-container">
+            <img src="/images/user.png" alt="User">
+            <p class="logged-in-user"><%= userName %></p>
+          </div>
           <% folders.forEach(f => { %>
             <div class="folder-container-nav">
                   <a href="/folders/<%= f.id %>" class="folder-name-nav"><%= f.name %></a>              
@@ -86,7 +90,6 @@
           </div>
         </div> 
       </div>
-    <a href="javascript:history.back()">Back to previous page</a>
   
     </div>
 

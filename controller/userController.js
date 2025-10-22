@@ -94,6 +94,10 @@ exports.createFolder = async (req,res) => {
 
 exports.getFolderContent = async (req, res) => {
     const folderId = req.params.id || 'root';
+    const loggedInUser = await prisma.user.findUnique({
+        where: {id:req.user.id}
+    })
+    const userName = loggedInUser.userName;
 
     try {
       if (folderId === 'root') {
@@ -105,7 +109,7 @@ exports.getFolderContent = async (req, res) => {
         const files = await prisma.file.findMany({
             where: { userId: req.user.id, folderId: null}
         })
-        return res.render('folders', { folder: null, folders, files,directoryArray });
+        return res.render('folders', { folder: null, folders, files, directoryArray, userName });
       }
       const folder = await prisma.folder.findUnique({
         where: { id: Number(folderId) },
@@ -123,6 +127,7 @@ exports.getFolderContent = async (req, res) => {
         folders: folder.children,
         files: folder.files,
         directoryArray,
+        userName
       });
   
     } catch (err) {
