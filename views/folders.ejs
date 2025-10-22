@@ -35,6 +35,13 @@
           <button id="newFolder"><img src="/images/addFolder.png" alt="Add folder">New Folder</button>
           <button id="newFile"><img src="/images/addFile.png" alt="Add file">New File</button>
         </div>
+        <div class="side-nav-container">
+          <% folders.forEach(f => { %>
+            <div class="folder-container-nav">
+                  <a href="/folders/<%= f.id %>" class="folder-name-nav"><%= f.name %></a>              
+            </div>
+          <% }) %>
+        </div>
         <div class="folders-files-content">
           <% folders.forEach(f => { %>
             <div class="folder">
@@ -77,9 +84,9 @@
               </div>
             <% }) %>
           </div>
-        </div>     
+        </div> 
       </div>
-      <a href="javascript:history.back()">Back to previous page</a>
+    <a href="javascript:history.back()">Back to previous page</a>
   
     </div>
 

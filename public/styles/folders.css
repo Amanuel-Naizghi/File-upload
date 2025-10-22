@@ -92,13 +92,14 @@ body{
     text-align: center;
 }
 #folders-page-container>.folders-files-container{
-    display:flex;
-    padding:1rem;
-    flex-direction: column;
+    display:grid;
+    grid-template-columns: 150px auto;
+    grid-template-rows: 1fr 4fr;
 }
 #folders-page-container>.folders-files-container>.new-folder-file-container{
     margin-bottom: 1rem;
     display:flex;
+    grid-column: 1 / 3;
 }
 #folders-page-container>.folders-files-container>.new-folder-file-container>button{
     background: #563e25;
@@ -118,8 +119,31 @@ body{
 #folders-page-container>.folders-files-container>.new-folder-file-container>button>img{
     margin-right:0.3rem;
 }
-#folders-page-container>.folders-files-container>.folders-files-content{
+#folders-page-container>.folders-files-container .side-nav-container{
+    grid-column: 1 / 2;
+    border-radius: 5px;
+    padding:1rem 0.7rem;
+    border-right: 1px solid rgb(219, 219, 219);
+}
+#folders-page-container>.folders-files-container>.side-nav-container>.folder-container-nav{
+    height:1.4rem;
+    border-radius:10px;
+    padding:0.3rem;
+}
+#folders-page-container>.folders-files-container>.side-nav-container>.folder-container-nav:hover{
+    background-color: rgb(181, 181, 181);
+}
+#folders-page-container>.folders-files-container>.side-nav-container .folder-name-nav{
+    text-decoration: none;
+    color:rgb(114, 114, 114);
+    display:block;
+    width:auto;
+    height:auto;
+}
+#folders-page-container>.folders-files-container .folders-files-content{
     display:flex;
+    grid-column:2 / 3;
+    padding:1rem 1.2rem;
 }
 #folders-page-container>.folders-files-container .folder{
     display:flex;
