@@ -47,8 +47,6 @@ app.use(express.static("public"));
 
 const PORT = process.env.PORT || 3000;
 //testing connection between prisma and render
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
 
 async function startServer() {
   try {
