@@ -46,5 +46,25 @@ app.use('/', router);
 app.use(express.static("public"));
 
 const PORT = process.env.PORT || 3000;
+//testing connection between prisma and render
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+
+async function startServer() {
+  try {
+    await prisma.$connect();
+    console.log('✅ Connected to the database successfully.');
+
+    const PORT = process.env.PORT || 10000;
+    app.listen(PORT, () => {
+      console.log(`You are running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('❌ Failed to connect to the database:', error);
+    process.exit(1);
+  }
+}
+
+startServer();
 
 app.listen(PORT, () => console.log(`You are running on port ${PORT}`));
