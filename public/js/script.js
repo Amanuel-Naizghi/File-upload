@@ -131,8 +131,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const name = item.getAttribute("data-name");
                 const date = item.getAttribute("data-date");
                 const type = item.getAttribute("data-type");
-                const id = item.id;
-
+                const id = item.getAttribute("data-id");
+                // console.log(`The id is `,id);
                 fileName.textContent = name;
                 fileDate.textContent = date.toString().replace(/ GMT.*/, '');
                 fileType.textContent = type;

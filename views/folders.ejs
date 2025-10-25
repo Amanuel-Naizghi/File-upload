@@ -71,7 +71,7 @@
           <% }) %>
           <div class="files">
             <% files.forEach(file => { %>
-              <div class="file-container" data-name="<%= file.filename %>" data-date="<%= file.createdAt %>" data-type="<%= file.mimetype %>">
+              <div class="file-container" data-id="<%= file.id %>" data-name="<%= file.filename %>" data-date="<%= file.createdAt %>" data-type="<%= file.mimetype %>">
                 <img src="/images/file.png" alt="file">
                 <div class="name-edit-delete">
                   <p class="name" ><%= file.filename %></p>

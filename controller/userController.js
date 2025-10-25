@@ -216,6 +216,7 @@ exports.uploadFile = async (req, res) => {
     }
 };
 
+
 exports.deleteFile = async(req,res) => {
     const {id,parentId} = req.body;
     try {
@@ -262,30 +263,40 @@ exports.editFileName = async(req,res) => {
     }
 }
 
-exports.downloadFile = async (req,res) => {
-    const {id} = req.params;
-    try{
-        const file = await prisma.file.findUnique({
-            where: {id:Number(id)}
-        });
-
-        if (!file){
-            return res.status(404).send("File not found");
-        }
-
-        const response = await axios.get(file.path, { responseType: 'arraybuffer' });
-
-        res.setHeader('Content-Disposition', `attachment; filename="${file.filename}"`);
-        res.setHeader('Content-Type', file.mimetype);
-
-        // Send the file data
-        res.send(Buffer.from(response.data, 'binary'));
-
-        
-    }catch (err){
-        res.status(500).send("Error downloading file");
+exports.downloadFile = async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const file = await prisma.file.findUnique({
+        where: { id: Number(id) },
+      });
+    //   console.log(`file to be downloaded `, file);
+      if (!file) {
+        return res.status(404).send("File not found");
+      }
+  
+      // Make sure the Cloudinary URL is valid
+      if (!file.path.startsWith("http")) {
+        return res.status(400).send("Invalid file URL");
+      }
+  
+      const response = await axios.get(file.path, {
+        responseType: "arraybuffer",
+        maxRedirects: 5,
+      });
+  
+      res.setHeader(
+        "Content-Disposition",
+        `attachment; filename="${file.filename}"`
+      );
+      res.setHeader("Content-Type", file.mimetype);
+      res.send(Buffer.from(response.data, "binary"));
+  
+    } catch (err) {
+      console.error("Download error:", err.message);
+      res.status(500).send("Error downloading file");
     }
-}
+  };
 
   
 
