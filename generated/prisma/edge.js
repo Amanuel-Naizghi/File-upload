@@ -157,7 +157,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/amanuel/repos/File-upload/generated/prisma",
+      "value": "/home/cpnt217/repos/File-upload/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -171,7 +171,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/amanuel/repos/File-upload/prisma/schema.prisma",
+    "sourceFilePath": "/home/cpnt217/repos/File-upload/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

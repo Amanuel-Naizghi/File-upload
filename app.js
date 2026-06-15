@@ -65,4 +65,4 @@ async function startServer() {
 
 startServer();
 
-app.listen(PORT, () => console.log(`You are running on port ${PORT}`));
+// app.listen(PORT, () => console.log(`You are running on port ${PORT}`));
