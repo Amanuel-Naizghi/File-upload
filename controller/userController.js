@@ -280,7 +280,7 @@ exports.downloadFile = async (req, res) => {
       if (!file.path.startsWith("http")) {
         return res.status(400).send("Invalid file URL");
       }
-  
+      console.log("Downloading:", file.path);
       const response = await axios.get(file.path, {
         responseType: "arraybuffer",
         maxRedirects: 5,
